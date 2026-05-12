@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes logoFill {
+  0% { clip-path: inset(100% 0 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+.animate-logo-fill {
+  animation: logoFill 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+@layer base {
+  :root {
+    --sutra-base: #cccec0;
+    --sutra-accent: #d89d03;
+    --sutra-deep: #302300;
+  }
+
+  * {
+    @apply border-sutra-deep/10;
+  }
+
+  body {
+    @apply bg-sutra-base text-sutra-deep font-body overflow-x-hidden;
+    background-color: #cccec0;
+    color: #302300;
+    min-height: 100vh;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: #d89d03;
+    color: #302300;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #cccec0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #302300;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d89d03;
+  }
+}
+
+/* Fractal Noise Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Typography Utilities */
+.display-tight {
+  @apply font-display tracking-tighter;
+}
+
+.heading-caps {
+  @apply font-heading uppercase tracking-widest;
+}
