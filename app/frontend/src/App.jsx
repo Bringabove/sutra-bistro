@@ -15,8 +15,11 @@ import { AlertCircle, X, Loader2 } from 'lucide-react';
 
 import SuggestionPopup from './components/SuggestionPopup';
 
-// Live Google Apps Script Web App URL
+// Live Google Apps Script Web App URL (Fallback for unsupported actions)
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbyoCVd3F3Fvxefk0iOE4ki1PqrKhrHD5bucCxPwu0mXmdUoDID2Kr2spYzYKOKCXk46/exec';
+
+// Live Production Backend URL
+const BASE_URL = 'https://sutra-bistro-api.onrender.com';
 
 // --- ERROR BOUNDARY ---
 class ErrorBoundary extends React.Component {
@@ -104,7 +107,7 @@ function App() {
   useEffect(() => {
     const fetchSheetData = async () => {
       try {
-        const response = await fetch('/api/data');
+        const response = await fetch(`${BASE_URL}/api/data`);
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         
@@ -159,14 +162,35 @@ function App() {
         payload.mobile = payload.phone; // Map phone to mobile for sheet compatibility
       }
 
-      const response = await fetch(GAS_URL, {
+      let fetchUrl = GAS_URL;
+      let fetchOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ action: actionType, ...payload }),
-      });
+      };
+
+      // Route reservations and contacts to the new production backend
+      if (actionType === 'reservation') {
+        fetchUrl = `${BASE_URL}/api/reservations`;
+        fetchOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        };
+      } else if (actionType === 'contact') {
+        fetchUrl = `${BASE_URL}/api/contact`;
+        fetchOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        };
+      }
+
+      const response = await fetch(fetchUrl, fetchOptions);
       const result = await response.json();
       
-      if (result.status === 'success') {
+      // Accept backend model response (response.ok) or GAS success status
+      if (response.ok || result.status === 'success') {
         const messages = {
           'reservation': 'Table Booked!',
           'suggestion': 'Dish Suggested! Thanks for your input.',
