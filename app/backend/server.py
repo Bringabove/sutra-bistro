@@ -2,15 +2,27 @@ import os
 import uuid
 from datetime import datetime, timezone
 from typing import List, Optional
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException, Body, Header
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, EmailStr
 from dotenv import load_dotenv
+import urllib.request
+import json
 
 load_dotenv()
 
 app = FastAPI(title="Sutra Bistro API")
+
+# Cache & Config
+CACHE = {"data": None}
+GAS_URL = "https://script.google.com/macros/s/AKfycbyoCVd3F3Fvxefk0iOE4ki1PqrKhrHD5bucCxPwu0mXmdUoDID2Kr2spYzYKOKCXk46/exec"
+WEBHOOK_API_KEY = os.getenv("API_KEY", "super_secret_sutra_token_123")
+
+def fetch_sheet_data():
+    req = urllib.request.Request(GAS_URL)
+    with urllib.request.urlopen(req) as response:
+        return json.loads(response.read().decode())
 
 # CORS Configuration
 origins = os.getenv("CORS_ORIGINS", "*").split(",")
@@ -56,6 +68,19 @@ class Contact(ContactBase):
 @app.get("/api")
 async def root():
     return {"message": "Sutra Bistro API is live."}
+
+@app.get("/api/data")
+async def get_data():
+    if CACHE["data"] is None:
+        CACHE["data"] = fetch_sheet_data()
+    return CACHE["data"]
+
+@app.post("/api/publish")
+async def publish_data(x_api_key: str = Header(...)):
+    if x_api_key != WEBHOOK_API_KEY:
+        raise HTTPException(status_code=401, detail="Invalid API Key")
+    CACHE["data"] = fetch_sheet_data()
+    return {"status": "success", "message": "Cache refreshed with latest data"}
 
 @app.post("/api/reservations", response_model=Reservation)
 async def create_reservation(reservation: ReservationBase):
