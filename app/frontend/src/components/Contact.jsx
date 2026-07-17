@@ -125,9 +125,10 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Your Name</label>
+                  <label htmlFor="contact-name" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Your Name</label>
                   <input 
                     required
+                    id="contact-name"
                     type="text" 
                     className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
                     placeholder="Rahul Sharma"
@@ -136,9 +137,10 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Phone Number</label>
+                  <label htmlFor="contact-phone" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Phone Number</label>
                   <input 
                     required
+                    id="contact-phone"
                     type="tel" 
                     className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
                     placeholder="+91 XXXXX XXXXX"
@@ -147,8 +149,9 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <label className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Email (Optional)</label>
+                  <label htmlFor="contact-email" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Email (Optional)</label>
                   <input 
+                    id="contact-email"
                     type="email" 
                     className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
                     placeholder="rahul@example.com"
@@ -158,9 +161,10 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Message</label>
+                <label htmlFor="contact-message" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Message</label>
                 <textarea 
                   required
+                  id="contact-message"
                   rows="4" 
                   className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all resize-none font-heading text-sm text-sutra-deep" 
                   placeholder="What's on your mind?"

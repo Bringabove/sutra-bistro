@@ -71,7 +71,8 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
               </div>
               <button 
                 onClick={onClose}
-                className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors"
+                aria-label="Close Suggestion Modal"
+                className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors hover:bg-white/10 rounded-full p-2"
               >
                 <X size={20} />
               </button>
@@ -89,7 +90,7 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
                     <Sparkles className="text-green-500" size={40} />
                   </div>
                   <div>
-                    <h4 className="font-display text-3xl text-sutra-deep uppercase mb-4">Thank You!</h4>
+                    <h3 className="font-display text-3xl text-sutra-deep uppercase mb-4">Thank You!</h3>
                     <p className="font-heading text-sm text-sutra-deep/60 leading-relaxed uppercase tracking-widest px-4">
                       Your suggestion has been received. We'll try to add it to our kitchen soon!
                     </p>
@@ -104,9 +105,10 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
 
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 ml-2">Dish Name *</label>
+                      <label htmlFor="suggest-dish-name" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 ml-2">Dish Name *</label>
                       <input 
                         required
+                        id="suggest-dish-name"
                         type="text" 
                         placeholder="e.g. Exotic Fruit Salad"
                         value={DishName}
@@ -116,8 +118,9 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 ml-2">Any special details? (Optional)</label>
+                      <label htmlFor="suggest-details" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 ml-2">Any special details? (Optional)</label>
                       <textarea 
+                        id="suggest-details"
                         rows={3}
                         placeholder="Describe how you'd like it..."
                         value={SpecialDetails}

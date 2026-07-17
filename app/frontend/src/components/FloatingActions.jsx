@@ -44,6 +44,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
               href={`tel:${phone.replace(/\s+/g, '')}`}
               className="w-14 h-14 bg-white text-sutra-deep rounded-full flex items-center justify-center shadow-2xl border border-sutra-deep/5 hover:bg-sutra-accent hover:text-sutra-deep transition-all group"
               title="Call Us"
+              aria-label="Call Us via Telephone"
             >
               <Phone size={20} />
               <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-theme text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Call Us</span>
@@ -54,6 +55,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
               rel="noreferrer"
               className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all group"
               title="WhatsApp"
+              aria-label="Chat on WhatsApp"
             >
               <img src="/images/contact-us/whatsapp.svg" alt="WhatsApp" className="w-7 h-7 object-contain" />
               <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-theme text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">WhatsApp Us</span>
@@ -61,7 +63,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
           </motion.div>
         )}
       </AnimatePresence>
-
+ 
       {/* Main Toggle Button (Contact Us) */}
       <AnimatePresence>
         {isVisible && (
@@ -73,12 +75,13 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
             className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 ${isOpen ? 'bg-sutra-accent text-sutra-deep' : 'bg-sutra-deep text-sutra-base'}`}
+            aria-label={isOpen ? "Close contact menu" : "Open quick contact menu"}
           >
             {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
           </motion.button>
         )}
       </AnimatePresence>
-
+ 
       {/* Scroll to Top */}
       <AnimatePresence>
         {isVisible && (
@@ -91,6 +94,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
             onClick={scrollToTop}
             className="w-16 h-16 bg-white/80 backdrop-blur-md text-sutra-deep rounded-full flex items-center justify-center shadow-xl border border-sutra-deep/5 hover:bg-sutra-deep hover:text-sutra-base transition-all"
             title="Take me to top"
+            aria-label="Scroll to top of the page"
           >
             <ArrowUp size={24} />
           </motion.button>

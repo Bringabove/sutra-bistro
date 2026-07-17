@@ -35,6 +35,9 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
           src={loc.images[currentImg]} 
           alt={loc.name} 
           className="w-full h-full object-cover" 
+          loading="lazy"
+          width="600"
+          height="256"
         />
         
         {/* Status Badge - Floating Top Right */}
@@ -94,7 +97,7 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
           </div>
           <div className="flex items-center gap-3">
             <Clock size={16} className="text-sutra-accent shrink-0" />
-            <p className="font-heading text-xs uppercase tracking-widest text-sutra-deep/60">{loc.time}</p>
+            <p className="font-heading text-xs uppercase tracking-widest text-sutra-deep/85 font-semibold">{loc.time}</p>
           </div>
         </div>
 
@@ -105,8 +108,8 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
           >
             <span>Order</span>
             <div className="flex -space-x-2 group-hover/btn:-space-x-1 transition-all duration-500">
-              <img src="/images/hero/icons/swiggy.png" className="w-5 h-5 object-contain rounded-full bg-white p-0.5 ring-1 ring-sutra-deep/10" alt="S" />
-              <img src="/images/hero/icons/zomato.png" className="w-5 h-5 object-contain rounded-full bg-white p-0.5 ring-1 ring-sutra-deep/10" alt="Z" />
+              <img src="/images/hero/icons/swiggy.png" className="w-5 h-5 object-contain rounded-full bg-white p-0.5 ring-1 ring-sutra-deep/10" alt="Swiggy Icon" width="20" height="20" loading="lazy" />
+              <img src="/images/hero/icons/zomato.png" className="w-5 h-5 object-contain rounded-full bg-white p-0.5 ring-1 ring-sutra-deep/10" alt="Zomato Icon" width="20" height="20" loading="lazy" />
             </div>
           </button>
 
@@ -295,6 +298,9 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
                   src="/images/about-us/french-fries.png" 
                   alt="Sutra French Fries" 
                   className="w-full max-w-[450px] h-auto drop-shadow-[0_20px_40px_rgba(48,35,0,0.05)] opacity-90"
+                  loading="lazy"
+                  width="450"
+                  height="300"
                 />
                 <div className="absolute inset-0 bg-sutra-accent/10 blur-[120px] rounded-full -z-10 animate-pulse" />
               </motion.div>

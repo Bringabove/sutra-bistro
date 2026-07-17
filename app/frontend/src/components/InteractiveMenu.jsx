@@ -124,7 +124,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 bg-white/30 backdrop-blur-md p-6 rounded-theme border border-sutra-deep/5 shadow-sm relative z-40">
               {/* Branch Switcher Tabs */}
               <div className="flex flex-col gap-3">
-                <span className="font-heading uppercase tracking-[0.2em] text-[9px] text-sutra-deep/40 px-2">Select Branch</span>
+                <span className="font-heading uppercase tracking-[0.2em] text-[9px] text-sutra-deep/75 px-2 font-bold">Select Branch</span>
                 <div className="flex bg-white/40 p-1.5 rounded-theme border border-sutra-deep/5">
                   {(branches && branches.length > 0 ? branches : [{ BranchName: 'Vijay Nagar' }, { BranchName: 'Siddharthanagar' }]).map((branch, idx) => {
                     const bName = branch.BranchName || branch.name;
@@ -151,6 +151,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                   <input 
                     type="text" 
                     placeholder="Search for a dish..."
+                    aria-label="Search for a dish"
                     value={searchQuery}
                     onChange={(e) => {
                       setSearchQuery(e.target.value);
@@ -160,7 +161,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                     className="w-full pl-16 pr-6 py-4 bg-white border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent/50 transition-all shadow-inner"
                   />
                   {searchQuery && (
-                    <button onClick={() => setSearchQuery('')} className="absolute right-4 p-1 hover:bg-sutra-deep/5 rounded-full transition-colors">
+                    <button onClick={() => setSearchQuery('')} aria-label="Clear search query" className="absolute right-4 p-1 hover:bg-sutra-deep/5 rounded-full transition-colors">
                       <X className="w-4 h-4 text-sutra-deep/40" />
                     </button>
                   )}
@@ -293,6 +294,9 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                         src={encodeURI(bannerSrc)} 
                         alt={catName} 
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                        loading="lazy"
+                        width="800"
+                        height="320"
                       />
                     );
                   })()}

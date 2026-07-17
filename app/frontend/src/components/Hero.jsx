@@ -109,6 +109,8 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
               src={slides[currentSlide].url} 
               alt="Bistro Background" 
               className="w-full h-full object-cover"
+              fetchPriority="high"
+              loading="eager"
             />
           </motion.div>
         </AnimatePresence>
@@ -124,7 +126,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             className="w-32 md:w-40" 
             data-testid="hero-logo"
           >
-            <img src="/images/global/sutra-logo.png" alt="Sutra Bistro Logo" className="w-full h-auto object-contain" />
+            <img src="/images/global/sutra-logo.png" alt="Sutra Bistro Logo" className="w-full h-auto object-contain" fetchPriority="high" loading="eager" />
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -256,7 +258,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <img src="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).png" alt="Pizza Slice" className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" />
+          <img src="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).png" alt="Pizza Slice" className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" fetchPriority="high" loading="eager" />
         </motion.div>
       </motion.div>
 
@@ -284,7 +286,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <img src="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).png" alt="Mojito Cocktail" className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" />
+          <img src="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).png" alt="Mojito Cocktail" className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" fetchPriority="high" loading="eager" />
         </motion.div>
       </motion.div>
 

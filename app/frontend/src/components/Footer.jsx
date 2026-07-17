@@ -92,8 +92,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
           <div className="lg:col-span-7">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 relative z-20" data-testid="reservation-form">
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Your Name</label>
+                <label htmlFor="reserve-name" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Your Name</label>
                 <input 
+                  id="reserve-name"
                   type="text" 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -103,8 +104,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 />
               </div>
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Phone</label>
+                <label htmlFor="reserve-phone" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Phone</label>
                 <input 
+                  id="reserve-phone"
                   type="tel" 
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -114,8 +116,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 />
               </div>
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Email (Optional)</label>
+                <label htmlFor="reserve-email" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Email (Optional)</label>
                 <input 
+                  id="reserve-email"
                   type="email" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -125,8 +128,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 />
               </div>
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Location</label>
+                <label htmlFor="reserve-location" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Location</label>
                 <select 
+                  id="reserve-location"
                   value={formData.branch}
                   onChange={(e) => setFormData({...formData, branch: e.target.value})}
                   className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors"
@@ -140,8 +144,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 </select>
               </div>
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Date</label>
+                <label htmlFor="reserve-date" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Date</label>
                 <input 
+                  id="reserve-date"
                   type="date" 
                   value={formData.date}
                   onChange={(e) => setFormData({...formData, date: e.target.value})}
@@ -150,8 +155,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 />
               </div>
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Time</label>
+                <label htmlFor="reserve-time" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Time</label>
                 <input 
+                  id="reserve-time"
                   type="time" 
                   value={formData.time}
                   onChange={(e) => setFormData({...formData, time: e.target.value})}
@@ -160,8 +166,9 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 />
               </div>
               <div className="group">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Guests</label>
+                <label htmlFor="reserve-guests" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Guests</label>
                 <input 
+                  id="reserve-guests"
                   type="number" 
                   min="1" 
                   max="30"
@@ -172,12 +179,13 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                 />
               </div>
               <div className="group md:col-span-2">
-                <label className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Anything special?</label>
-                <textarea 
+                <label htmlFor="reserve-message" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Anything special?</label>
+                <input 
+                  id="reserve-message"
+                  type="text"
                   value={formData.message}
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
                   className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors resize-none placeholder-sutra-base/40"
-                  rows="1"
                   placeholder="Special requests..."
                   data-testid="form-message"
                 />
@@ -208,7 +216,7 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
                       <MapPin className="text-sutra-accent mt-1" size={24} />
                       <div className="flex-1">
                         <div className="flex items-center justify-between gap-4 mb-2">
-                          <h4 className="font-display text-2xl uppercase group-hover:text-sutra-accent transition-colors">{loc.name}</h4>
+                          <h3 className="font-display text-2xl uppercase group-hover:text-sutra-accent transition-colors">{loc.name}</h3>
                           <a 
                             href={loc.url} 
                             target="_blank" 
@@ -250,7 +258,7 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
         {/* Logo Section */}
         <div className="mt-10 border-t border-sutra-base/10 pt-6 flex justify-between items-end">
           <div className="w-44 md:w-56 -ml-4 md:-ml-6 opacity-40 hover:opacity-100 transition-opacity duration-500">
-            <img src="/images/global/sutra-logo.png" alt="Sutra Bistro Logo" className="w-full h-auto object-contain filter brightness-0 invert" />
+            <img src="/images/global/sutra-logo.png" alt="Sutra Bistro Logo" className="w-full h-auto object-contain filter brightness-0 invert" loading="lazy" width="224" height="60" />
           </div>
         </div>
 

@@ -43,6 +43,9 @@ const Navbar = () => {
               alt="Sutra Bistro Logo" 
               className="w-full h-auto object-contain transition-all duration-300"
               style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(85%) saturate(3048%) hue-rotate(355deg) brightness(87%) contrast(114%)' }} 
+              width="144"
+              height="40"
+              loading="lazy"
             />
           </a>
 

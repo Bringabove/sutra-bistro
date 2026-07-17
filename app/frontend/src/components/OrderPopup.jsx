@@ -98,13 +98,14 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
               <button 
                 onClick={onClose}
                 className="absolute top-8 right-8 w-12 h-12 rounded-full bg-sutra-deep/5 flex items-center justify-center text-sutra-deep hover:bg-red-500 hover:text-white transition-all z-20 group"
+                aria-label="Close Ordering Modal"
               >
                 <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
               </button>
 
               <div className="mb-12">
                 <span className="font-heading uppercase tracking-[0.3em] text-[10px] md:text-xs text-sutra-deep/30 font-bold block mb-4">Choose Platform</span>
-                <h4 className="font-display text-4xl md:text-5xl text-sutra-deep uppercase leading-tight">Order From <br /><span className="text-sutra-accent">{selectedOrderBranch?.BranchName || "Sutra Bistro"}</span></h4>
+                <h3 className="font-display text-4xl md:text-5xl text-sutra-deep uppercase leading-tight">Order From <br /><span className="text-sutra-accent">{selectedOrderBranch?.BranchName || "Sutra Bistro"}</span></h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -116,7 +117,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                     className="group relative p-10 bg-sutra-deep/5 rounded-theme border-2 border-transparent hover:border-sutra-accent hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-500 text-center"
                   >
                     <div className="relative w-20 h-20 mx-auto mb-8">
-                      <img src="/images/hero/icons/swiggy.png" className="w-full h-full object-contain" alt="Swiggy" />
+                      <img src="/images/hero/icons/swiggy.png" className="w-full h-full object-contain" alt="Swiggy" width="80" height="80" loading="lazy" />
                     </div>
                     <div className="absolute top-6 right-6 px-4 py-1.5 bg-sutra-deep text-sutra-base rounded-full text-xs font-bold shadow-lg overflow-hidden border border-white/10">
                       <span className="relative z-10">★ {currentRatings.swiggy}</span>
@@ -126,7 +127,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                   </a>
                 ) : (
                   <div className="p-10 bg-sutra-deep/[0.02] border-2 border-dashed border-sutra-deep/10 rounded-theme flex flex-col items-center justify-center opacity-30 grayscale">
-                    <img src="/images/hero/icons/swiggy.png" className="w-16 h-16 object-contain opacity-50 mb-6" alt="Swiggy" />
+                    <img src="/images/hero/icons/swiggy.png" className="w-16 h-16 object-contain opacity-50 mb-6" alt="Offline Swiggy Link" width="64" height="64" loading="lazy" />
                     <span className="font-heading font-bold uppercase tracking-widest text-xs">Offline</span>
                   </div>
                 )}
@@ -139,7 +140,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                     className="group relative p-10 bg-sutra-deep/5 rounded-theme border-2 border-transparent hover:border-sutra-accent hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-500 text-center"
                   >
                     <div className="relative w-20 h-20 mx-auto mb-8">
-                      <img src="/images/hero/icons/zomato.png" className="w-full h-full object-contain" alt="Zomato" />
+                      <img src="/images/hero/icons/zomato.png" className="w-full h-full object-contain" alt="Zomato" width="80" height="80" loading="lazy" />
                     </div>
                     <div className="absolute top-6 right-6 px-4 py-1.5 bg-sutra-deep text-sutra-base rounded-full text-xs font-bold shadow-lg overflow-hidden border border-white/10">
                       <span className="relative z-10">★ {currentRatings.zomato}</span>
@@ -149,7 +150,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                   </a>
                 ) : (
                   <div className="p-10 bg-sutra-deep/[0.02] border-2 border-dashed border-sutra-deep/10 rounded-theme flex flex-col items-center justify-center opacity-30 grayscale">
-                    <img src="/images/hero/icons/zomato.png" className="w-16 h-16 object-contain opacity-50 mb-6" alt="Zomato" />
+                    <img src="/images/hero/icons/zomato.png" className="w-16 h-16 object-contain opacity-50 mb-6" alt="Offline Zomato Link" width="64" height="64" loading="lazy" />
                     <span className="font-heading font-bold uppercase tracking-widest text-xs">Offline</span>
                   </div>
                 )}

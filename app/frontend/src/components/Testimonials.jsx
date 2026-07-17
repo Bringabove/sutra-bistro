@@ -56,7 +56,7 @@ const TestimonialCard = ({ name, content, rating = 5 }) => (
         {name ? name.charAt(0) : "S"}
       </div>
       <div>
-        <h4 className="font-display text-xs uppercase tracking-[0.2em] text-sutra-deep leading-none">{name || "Anonymous"}</h4>
+        <p className="font-display text-xs uppercase tracking-[0.2em] text-sutra-deep leading-none font-bold">{name || "Anonymous"}</p>
         <span className="font-heading text-[9px] uppercase tracking-widest text-sutra-accent/60 mt-1 block">Verified Guest</span>
       </div>
     </div>
@@ -116,6 +116,7 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
             {/* Close Button */}
             <button 
               onClick={onClose}
+              aria-label="Close Video Player"
               className="absolute top-6 right-6 z-50 p-2 bg-white/10 hover:bg-sutra-accent rounded-full text-white hover:text-sutra-deep transition-all"
             >
               <X size={24} />
@@ -133,7 +134,7 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
 
             {/* Sidebar: More Videos - On the right */}
             <div className="w-full md:w-72 bg-sutra-deep p-6 overflow-y-auto no-scrollbar border-l border-white/5 flex flex-col">
-              <h4 className="font-display text-[10px] uppercase tracking-[0.2em] text-sutra-accent/60 mb-6">Experience More</h4>
+              <p className="font-display text-[10px] uppercase tracking-[0.2em] text-sutra-accent/60 mb-6 font-bold">Experience More</p>
               <div className="flex flex-col gap-4">
                 {videos.map((url, idx) => {
                   const id = url.includes('/reel/') ? (url.split('/reel/')[1]?.split(/[/?]/)[0]) : idx;
@@ -348,9 +349,12 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
-                src={selectedBranch?.image || "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=srgb&fm=jpg&w=800&q=85"} 
+                src={selectedBranch?.image || "/images/global/sutra-logo.png"} 
                 alt={selectedBranch?.name || "Sutra Bistro"}
                 className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+                width="480"
+                height="600"
               />
             </AnimatePresence>
             <div className="absolute inset-0 bg-gradient-to-r lg:bg-gradient-to-t from-sutra-deep/60 via-transparent to-transparent" />

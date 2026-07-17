@@ -83,9 +83,10 @@ const NotificationBanner = ({ branches = [] }) => {
     <AnimatePresence>
       {isVisible && closedBranches.length > 0 && (
         <motion.div 
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
+          initial={{ scaleY: 0, opacity: 0 }}
+          animate={{ scaleY: 1, opacity: 1 }}
+          exit={{ scaleY: 0, opacity: 0 }}
+          style={{ transformOrigin: 'top' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="bg-red-600 text-white relative z-[100] shadow-lg overflow-hidden flex flex-col"
         >

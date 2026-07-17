@@ -70,8 +70,11 @@ const InstagramWall = () => {
             >
               <img 
                 src={img} 
-                alt="Vibe" 
+                alt="Sutra Bistro Instagram Vibe Card" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                loading="lazy"
+                width="400"
+                height="200"
               />
             </motion.div>
           ))}
@@ -92,6 +95,7 @@ const InstagramWall = () => {
               scrolling="no" 
               allow="encrypted-media"
               title="Instagram Feed"
+              loading="lazy"
             />
           </motion.div>
 
@@ -108,8 +112,11 @@ const InstagramWall = () => {
             >
               <img 
                 src={img} 
-                alt="Vibe" 
+                alt="Sutra Bistro Instagram Vibe Card" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                loading="lazy"
+                width="400"
+                height="200"
               />
             </motion.div>
           ))}
