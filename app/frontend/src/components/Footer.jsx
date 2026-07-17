@@ -274,7 +274,14 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
         {/* Logo Section */}
         <div className="mt-10 border-t border-sutra-base/10 pt-6 flex justify-between items-end">
           <div className="w-44 md:w-56 -ml-4 md:-ml-6 opacity-40 hover:opacity-100 transition-opacity duration-500">
-            <img src="/images/global/sutra-logo.png" alt="Sutra Bistro Logo" className="w-full h-auto object-contain filter brightness-0 invert" loading="lazy" width="224" height="60" />
+            <img 
+              src="/images/global/sutra-logo.png" 
+              alt="Sutra Bistro Logo" 
+              width={224} 
+              height={60} 
+              loading="lazy" 
+              className="w-auto h-auto object-contain filter brightness-0 invert" 
+            />
           </div>
         </div>
 

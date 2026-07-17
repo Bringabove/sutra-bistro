@@ -131,18 +131,15 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             className="w-32 md:w-40" 
             data-testid="hero-logo"
           >
-            <picture className="w-full h-auto">
-              <source srcSet="/images/global/sutra-logo.webp" type="image/webp" />
-              <img 
-                src="/images/global/sutra-logo.png" 
-                alt="Sutra Bistro Logo" 
-                className="w-full h-auto object-contain" 
-                fetchPriority="high" 
-                loading="eager" 
-                width={160}
-                height={44}
-              />
-            </picture>
+            <img 
+              src="/images/global/sutra-logo.png" 
+              alt="Sutra Bistro Logo" 
+              width={160}
+              height={44}
+              loading="eager"
+              fetchPriority="high"
+              className="w-auto h-auto object-contain" 
+            />
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 20 }}

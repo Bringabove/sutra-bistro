@@ -47,19 +47,17 @@ const Navbar = () => {
           data-testid="sticky-navbar"
         >
           {/* Left: Logo */}
-          <a href="#top" className="w-32 md:w-36 -ml-2 md:-ml-4" data-testid="nav-logo">
-            <picture className="w-full h-auto object-contain transition-all duration-300">
-              <source srcSet="/images/global/sutra-logo.webp" type="image/webp" />
-              <img 
-                src="/images/global/sutra-logo.png" 
-                alt="Sutra Bistro Logo" 
-                className="w-full h-auto object-contain transition-all duration-300"
-                style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(85%) saturate(3048%) hue-rotate(355deg) brightness(87%) contrast(114%)' }} 
-                width="144"
-                height="40"
-                loading="lazy"
-              />
-            </picture>
+          <a href="#top" className="w-32 md:w-36 -ml-2 md:-ml-4 flex items-center" data-testid="nav-logo">
+            <img 
+              src="/images/global/sutra-logo.png" 
+              alt="Sutra Bistro Logo" 
+              width={128}
+              height={53} 
+              loading="eager"
+              fetchPriority="high"
+              className="w-auto h-auto object-contain transition-all duration-300"
+              style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(85%) saturate(3048%) hue-rotate(355deg) brightness(87%) contrast(114%)' }} 
+            />
           </a>
 
           {/* Center: Links */}
