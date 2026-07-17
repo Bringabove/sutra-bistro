@@ -291,15 +291,19 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                     };
                     const bannerSrc = bannerMap[catName] || activeCategory.CategoryImage || "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=srgb&fm=jpg&w=900&q=85";
                     
+                    const convertedSrc = encodeURI(bannerSrc);
                     return (
-                      <img 
-                        src={encodeURI(bannerSrc)} 
-                        alt={catName} 
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
-                        loading="lazy"
-                        width="800"
-                        height="320"
-                      />
+                      <picture className="w-full h-full block">
+                        <source srcSet={convertedSrc.replace(/\.(png|jpg|jpeg|gif)$/i, '.webp')} type="image/webp" />
+                        <img 
+                          src={convertedSrc} 
+                          alt={catName} 
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                          loading="lazy"
+                          width={800}
+                          height={320}
+                        />
+                      </picture>
                     );
                   })()}
                   <div className="absolute inset-0 bg-gradient-to-t from-sutra-deep via-sutra-deep/20 to-transparent opacity-80" />

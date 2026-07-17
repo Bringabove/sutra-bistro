@@ -28,17 +28,20 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
     >
       {/* Image Carousel Container */}
       <div className={`h-64 relative overflow-hidden ${isTemporarilyClosed ? '' : 'group-hover:opacity-100'}`}>
-        <motion.img 
-          key={currentImg}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          src={loc.images[currentImg]} 
-          alt={loc.name} 
-          className="w-full h-full object-cover" 
-          loading="lazy"
-          width="600"
-          height="256"
-        />
+        <picture className="w-full h-full block">
+          <source srcSet={loc.images[currentImg]?.replace(/\.(png|jpg|jpeg)$/i, '.webp')} type="image/webp" />
+          <motion.img 
+            key={currentImg}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            src={loc.images[currentImg]} 
+            alt={loc.name} 
+            className="w-full h-full object-cover" 
+            loading="lazy"
+            width={600}
+            height={256}
+          />
+        </picture>
         
         {/* Status Badge - Floating Top Right */}
         <div className="absolute top-6 right-6 z-30 pointer-events-none">
@@ -294,14 +297,17 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 className="relative z-0"
               >
-                <img 
-                  src="/images/about-us/french-fries.png" 
-                  alt="Sutra French Fries" 
-                  className="w-full max-w-[450px] h-auto drop-shadow-[0_20px_40px_rgba(48,35,0,0.05)] opacity-90"
-                  loading="lazy"
-                  width="450"
-                  height="300"
-                />
+                <picture>
+                  <source srcSet="/images/about-us/french-fries.webp" type="image/webp" />
+                  <img 
+                    src="/images/about-us/french-fries.png" 
+                    alt="Sutra French Fries" 
+                    className="w-full max-w-[450px] h-auto drop-shadow-[0_20px_40px_rgba(48,35,0,0.05)] opacity-90"
+                    loading="lazy"
+                    width={450}
+                    height={300}
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-sutra-accent/10 blur-[120px] rounded-full -z-10 animate-pulse" />
               </motion.div>
             </div>

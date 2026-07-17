@@ -376,19 +376,22 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
           {/* Right Side: Dynamic Image */}
           <div className="lg:w-2/5 min-h-[300px] lg:min-h-full relative overflow-hidden">
             <AnimatePresence mode="wait">
-              <motion.img 
-                key={selectedBranch?.id || 'default'}
-                initial={{ opacity: 0, scale: 1.2 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                src={selectedBranch?.image || "/images/global/sutra-logo.png"} 
-                alt={selectedBranch?.name || "Sutra Bistro"}
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="lazy"
-                width="480"
-                height="600"
-              />
+              <picture className="absolute inset-0 w-full h-full block">
+                <source srcSet={(selectedBranch?.image || "/images/global/sutra-logo.png")?.replace(/\.(png|jpg|jpeg)$/i, '.webp')} type="image/webp" />
+                <motion.img 
+                  key={selectedBranch?.id || 'default'}
+                  initial={{ opacity: 0, scale: 1.2 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  src={selectedBranch?.image || "/images/global/sutra-logo.png"} 
+                  alt={selectedBranch?.name || "Sutra Bistro"}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  width={480}
+                  height={600}
+                />
+              </picture>
             </AnimatePresence>
             <div className="absolute inset-0 bg-gradient-to-r lg:bg-gradient-to-t from-sutra-deep/60 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
