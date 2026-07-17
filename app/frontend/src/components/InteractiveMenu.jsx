@@ -148,7 +148,9 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                   <div className="absolute left-3 p-2.5 bg-sutra-accent rounded-theme z-10 flex items-center justify-center shadow-lg">
                     <Search className="w-4 h-4 text-sutra-deep" strokeWidth={3} />
                   </div>
+                  <label htmlFor="dish-search" className="sr-only">Search for a dish</label>
                   <input 
+                    id="dish-search"
                     type="text" 
                     placeholder="Search for a dish..."
                     aria-label="Search for a dish"

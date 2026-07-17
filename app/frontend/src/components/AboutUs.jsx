@@ -248,7 +248,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
       reviews: b.Reviews || b.reviews || "",
       time: b.Hours || b.OpHours || b.time || "Visit us to know more",
       status: b.Status || b.status || "OPEN",
-      link: b.MapLink || b.MapsURL || b.link || "#",
+      link: b.MapLink || b.MapsURL || b.link || "https://maps.google.com/?q=Sutra+Bistro+Mysuru",
       swiggy: b.SwiggyLink,
       zomato: b.ZomatoLink,
       googleReview: b.GoogleBusinessLink,

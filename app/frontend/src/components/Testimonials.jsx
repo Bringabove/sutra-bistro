@@ -65,26 +65,41 @@ const TestimonialCard = ({ name, content, rating = 5 }) => (
 
 const getOptimizedVideoUrl = (url) => {
   if (url && url.includes('cloudinary.com') && url.includes('/video/upload/')) {
-    return url.replace('/video/upload/', '/video/upload/q_auto,f_auto,w_1280,vc_auto/');
+    return url.replace('/video/upload/', '/video/upload/q_auto:eco,f_auto,vc_vp9,w_1280,br_1.5m/');
   }
   return url;
 };
 
-const VideoCard = ({ url, onClick }) => {
+const VideoCard = ({ url, onClick, isLoaded }) => {
   return (
     <div 
       onClick={onClick}
       className="my-4 mx-2 w-full aspect-[9/16] rounded-theme overflow-hidden bg-sutra-deep/5 border border-sutra-deep/10 shadow-lg group relative cursor-pointer"
     >
-      <video 
-        src={getOptimizedVideoUrl(url)}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-      />
+      {isLoaded ? (
+        <video 
+          src={getOptimizedVideoUrl(url)}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster="/images/hero/hero-video-placeholder.webp"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+      ) : (
+        <picture className="w-full h-full">
+          <source srcSet="/images/hero/hero-video-placeholder.webp" type="image/webp" />
+          <img 
+            src="/images/hero/hero-video-placeholder.webp" 
+            alt="Sutra Video Preview" 
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            width={320}
+            height={568}
+            loading="lazy"
+          />
+        </picture>
+      )}
       
       {/* Play Overlay */}
       <div className="absolute inset-0 bg-sutra-deep/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
@@ -177,6 +192,14 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
 const Testimonials = ({ testimonials = [], branches = [] }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Fallback branch links if sheet is empty
   const defaultBranchLinks = [
@@ -198,7 +221,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
     return {
       id: name?.toLowerCase().replace(/\s+/g, '-'),
       name: name,
-      url: b.GoogleBusinessLink || b.GoogleReviewLink || b.ReviewURL || b.url || "#",
+      url: b.GoogleBusinessLink || b.GoogleReviewLink || b.ReviewURL || b.url || "https://g.page/sutra-vjn/review",
       image: branchImage
     };
   }) : defaultBranchLinks;
@@ -212,7 +235,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
       return {
         id: name?.toLowerCase().replace(/\s+/g, '-'),
         name: name,
-        url: vijay.GoogleBusinessLink || vijay.GoogleReviewLink || vijay.ReviewURL || vijay.url || "#",
+        url: vijay.GoogleBusinessLink || vijay.GoogleReviewLink || vijay.ReviewURL || vijay.url || "https://g.page/sutra-vjn/review",
         image: branchImage
       };
     }
@@ -295,7 +318,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
           <Marquee gradient={false} speed={30} direction="right" pauseOnHover={true}>
             {displayVideos.map((url, i) => (
               <div key={i} className="w-[200px] md:w-[320px] mx-4 md:mx-10">
-                <VideoCard url={url} onClick={() => openVideo(url)} />
+                <VideoCard url={url} onClick={() => openVideo(url)} isLoaded={isLoaded} />
               </div>
             ))}
           </Marquee>
@@ -337,7 +360,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
               </div>
 
               <motion.a
-                href={selectedBranch?.url || "#"}
+                href={selectedBranch?.url || "https://g.page/sutra-vjn/review"}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
