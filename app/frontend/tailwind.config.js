@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        theme: "var(--theme-radius, 0.75rem)",
+      },
       colors: {
         sutra: {
           base: "#cccec0",

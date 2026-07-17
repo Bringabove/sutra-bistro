@@ -34,8 +34,11 @@ const DeliveryMarquee = ({ onOrderClick }) => {
   };
 
   return (
-    <div className="relative py-12 md:py-16 overflow-hidden bg-sutra-base select-none" data-testid="delivery-marquee">
-      <div className="bg-sutra-accent text-sutra-deep border-y-2 border-sutra-deep py-6 md:py-8 shadow-2xl -rotate-[1.5deg] scale-[1.05] overflow-y-hidden">
+    <div className="relative py-6 md:py-8 overflow-hidden bg-transparent select-none z-20 w-[105vw] left-[-2.5vw] -mt-12 md:-mt-16" data-testid="delivery-marquee">
+      <div 
+        className="bg-sutra-accent text-sutra-deep border-y-2 border-sutra-deep py-6 md:py-8 scale-[1.05] overflow-y-hidden"
+        style={{ transform: 'skewY(-2deg)', outline: '1px solid #d89d03', backfaceVisibility: 'hidden' }}
+      >
         <Marquee speed={60} gradient={false} pauseOnHover>
           <div className="flex items-center overflow-y-hidden py-2">
             {[...content, ...content, ...content].map((item, idx) => (

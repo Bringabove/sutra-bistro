@@ -46,7 +46,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
               title="Call Us"
             >
               <Phone size={20} />
-              <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-lg text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Call Us</span>
+              <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-theme text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Call Us</span>
             </a>
             <a 
               href={whatsapp}
@@ -55,8 +55,8 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
               className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all group"
               title="WhatsApp"
             >
-              <MessageCircle size={24} />
-              <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-lg text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">WhatsApp Us</span>
+              <img src="/images/contact-us/whatsapp.svg" alt="WhatsApp" className="w-7 h-7 object-contain" />
+              <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-theme text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">WhatsApp Us</span>
             </a>
           </motion.div>
         )}
@@ -74,12 +74,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
             onClick={() => setIsOpen(!isOpen)}
             className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 ${isOpen ? 'bg-sutra-accent text-sutra-deep' : 'bg-sutra-deep text-sutra-base'}`}
           >
-            {isOpen ? <X size={28} /> : (
-              <div className="flex flex-col items-center">
-                <MessageCircle size={24} />
-                <span className="text-[7px] uppercase font-bold mt-0.5">Contact</span>
-              </div>
-            )}
+            {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
           </motion.button>
         )}
       </AnimatePresence>

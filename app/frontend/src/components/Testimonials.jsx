@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Marquee from 'react-fast-marquee';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, MapPin, ExternalLink, Quote, X, Maximize2 } from 'lucide-react';
+import FadeIn from './FadeIn';
 
 const branchLinks = [
   { id: "vjn", name: "Vijay Nagar", short: "01", url: "https://g.page/sutra-vjn/review", image: "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png" },
@@ -23,7 +24,7 @@ const testimonialsRow2 = [
 ];
 
 const TestimonialCard = ({ name, content, rating = 5 }) => (
-  <div className="mx-4 p-10 bg-white/40 backdrop-blur-md rounded-[3rem] border border-sutra-deep/5 w-[320px] md:w-[480px] flex flex-col justify-between h-full group hover:bg-white/60 transition-all duration-700">
+  <div className="mx-4 p-10 bg-white/40 backdrop-blur-md rounded-theme border border-sutra-deep/5 w-[320px] md:w-[480px] flex flex-col justify-between h-full group hover:bg-white/60 transition-all duration-700">
     <div className="relative">
       {/* Decorative Quote Icon - Top Right, Brand Brown Filled */}
       <Quote className="absolute -top-6 -right-6 w-16 h-16 text-sutra-deep/10 fill-current -z-10 scale-x-[-1]" />
@@ -66,7 +67,7 @@ const VideoCard = ({ url, onClick }) => {
   return (
     <div 
       onClick={onClick}
-      className="my-4 mx-2 w-full aspect-[9/16] rounded-[2rem] overflow-hidden bg-sutra-deep/5 border border-sutra-deep/10 shadow-lg group relative cursor-pointer"
+      className="my-4 mx-2 w-full aspect-[9/16] rounded-theme overflow-hidden bg-sutra-deep/5 border border-sutra-deep/10 shadow-lg group relative cursor-pointer"
     >
       <video 
         src={url}
@@ -110,7 +111,7 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="relative w-fit max-w-[95vw] h-[85vh] bg-sutra-base rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/10"
+            className="relative w-fit max-w-[95vw] h-[85vh] bg-sutra-base rounded-theme overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/10"
           >
             {/* Close Button */}
             <button 
@@ -126,7 +127,7 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
                 src={activeVideo}
                 autoPlay
                 controls
-                className="h-full w-auto max-w-full object-contain rounded-[2rem] shadow-2xl border border-white/5"
+                className="h-full w-auto max-w-full object-contain rounded-theme shadow-2xl border border-white/5"
               />
             </div>
 
@@ -142,7 +143,7 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
                     <button
                       key={idx}
                       onClick={() => setActiveVideo(url)}
-                      className={`relative aspect-[9/16] w-full rounded-2xl overflow-hidden border-2 transition-all flex-shrink-0 ${activeVideo === url ? 'border-sutra-accent scale-95 shadow-lg shadow-sutra-accent/20' : 'border-transparent opacity-40 hover:opacity-100 hover:scale-105'}`}
+                      className={`relative aspect-[9/16] w-full rounded-theme overflow-hidden border-2 transition-all flex-shrink-0 ${activeVideo === url ? 'border-sutra-accent scale-95 shadow-lg shadow-sutra-accent/20' : 'border-transparent opacity-40 hover:opacity-100 hover:scale-105'}`}
                     >
                       <video
                         src={url}
@@ -191,7 +192,32 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
     };
   }) : defaultBranchLinks;
 
-  const [selectedBranch, setSelectedBranch] = useState(displayBranchLinks[0]);
+  const [selectedBranch, setSelectedBranch] = useState(() => {
+    const initialLinks = branches && branches.length > 0 ? branches : defaultBranchLinks;
+    const vijay = initialLinks.find(b => (b.BranchName || b.name || "").toLowerCase().includes("vijay"));
+    if (vijay) {
+      const name = vijay.BranchName || vijay.name;
+      let branchImage = "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png";
+      return {
+        id: name?.toLowerCase().replace(/\s+/g, '-'),
+        name: name,
+        url: vijay.GoogleBusinessLink || vijay.GoogleReviewLink || vijay.ReviewURL || vijay.url || "#",
+        image: branchImage
+      };
+    }
+    return defaultBranchLinks[0];
+  });
+
+  useEffect(() => {
+    if (displayBranchLinks && displayBranchLinks.length > 0) {
+      const vijayNagarBranch = displayBranchLinks.find(b => b.name?.toLowerCase().includes("vijay"));
+      if (vijayNagarBranch) {
+        setSelectedBranch(vijayNagarBranch);
+      } else {
+        setSelectedBranch(displayBranchLinks[0]);
+      }
+    }
+  }, [branches]);
 
   // Split testimonials into text and video
   const defaultTestimonials = [
@@ -219,24 +245,25 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
   };
 
   return (
-    <section id="reviews" className="bg-sutra-base py-24 md:py-40 relative overflow-hidden" data-testid="testimonials-section">
+    <section id="reviews" className="bg-sutra-base py-24 md:py-40 relative overflow-hidden rounded-theme shadow-md" data-testid="testimonials-section">
       <div className="max-w-7xl mx-auto px-6 mb-20">
-        <div className="max-w-2xl">
+        <FadeIn className="max-w-2xl">
           <div className="font-heading uppercase tracking-[0.4em] text-[10px] text-sutra-accent mb-6 flex items-center gap-3">
             <div className="w-8 h-[1px] bg-sutra-accent" />
             Voices of Sutra
           </div>
           <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85] text-sutra-deep uppercase">
-            WHAT OUR <br /><span className="text-sutra-accent">GUESTS SAY.</span>
+            <span className="block">WHAT OUR</span>
+            <span className="block text-sutra-accent">GUESTS SAY.</span>
           </h2>
-        </div>
+        </FadeIn>
       </div>
 
       {/* Stacked Horizontal Marquees */}
-      <div className="space-y-12 mb-32 relative">
+      <div className="space-y-12 mb-32">
         
         {/* Row 1: Text Testimonials */}
-        <div className="relative">
+        <div className="relative flex flex-col justify-stretch">
           <Marquee gradient={false} speed={40} pauseOnHover={true}>
             {finalTestimonials.map((t, i) => (
               <TestimonialCard 
@@ -247,10 +274,13 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
               />
             ))}
           </Marquee>
+          {/* Side Fades for Row 1 */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-sutra-base to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-sutra-base to-transparent z-10 pointer-events-none" />
         </div>
 
         {/* Row 2: Video Reels (Horizontal Scroll) */}
-        <div className="relative">
+        <div className="relative flex flex-col justify-stretch">
           <Marquee gradient={false} speed={30} direction="right" pauseOnHover={true}>
             {displayVideos.map((url, i) => (
               <div key={i} className="w-[200px] md:w-[320px] mx-4 md:mx-10">
@@ -258,11 +288,10 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
               </div>
             ))}
           </Marquee>
+          {/* Side Fades for Row 2 */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-sutra-base to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-sutra-base to-transparent z-10 pointer-events-none" />
         </div>
-
-        {/* Side Fades for both marquees */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-sutra-base to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-sutra-base to-transparent z-10 pointer-events-none" />
       </div>
 
       {/* Review CTA Box */}
@@ -271,7 +300,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-sutra-deep rounded-[4rem] text-left shadow-2xl relative overflow-hidden flex flex-col lg:flex-row"
+          className="bg-sutra-deep rounded-theme text-left shadow-2xl relative overflow-hidden flex flex-col lg:flex-row"
         >
           {/* Left Side: Content */}
           <div className="p-10 md:p-16 lg:p-20 flex-1 relative z-10">
@@ -288,7 +317,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
                     <button
                       key={branch.id || idx}
                       onClick={() => setSelectedBranch(branch)}
-                      className={`px-6 py-3 rounded-2xl font-display text-sm uppercase tracking-wider flex items-center justify-center transition-all duration-500 border ${selectedBranch?.id === branch.id ? 'bg-sutra-accent text-sutra-deep border-sutra-accent shadow-lg' : 'bg-white/5 text-sutra-base/40 border-white/10 hover:border-sutra-accent/50'}`}
+                      className={`px-6 py-3 rounded-theme font-display text-sm uppercase tracking-wider flex items-center justify-center transition-all duration-500 border ${selectedBranch?.id === branch.id ? 'bg-sutra-accent text-sutra-deep border-sutra-accent shadow-lg' : 'bg-white/5 text-sutra-base/40 border-white/10 hover:border-sutra-accent/50'}`}
                     >
                       {branch.name}
                     </button>
@@ -302,7 +331,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-4 bg-sutra-base text-sutra-deep px-12 py-5 rounded-2xl font-heading uppercase tracking-[0.2em] text-xs font-bold shadow-xl hover:bg-sutra-accent transition-all duration-500"
+                className="inline-flex items-center gap-4 bg-sutra-base text-sutra-deep px-12 py-5 rounded-theme font-heading uppercase tracking-[0.2em] text-xs font-bold shadow-xl hover:bg-sutra-accent transition-all duration-500"
               >
                 Review on Google
                 <ExternalLink size={14} />

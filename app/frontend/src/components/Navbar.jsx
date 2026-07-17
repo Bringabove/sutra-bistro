@@ -33,7 +33,7 @@ const Navbar = () => {
           animate={{ y: 0, x: '-50%' }}
           exit={{ y: -80, x: '-50%' }}
           transition={{ type: 'spring', stiffness: 180, damping: 22 }}
-          className="fixed top-4 left-1/2 z-50 w-[min(96vw,1100px)] backdrop-blur-xl bg-white/45 border border-white/40 rounded-full shadow-[0_8px_32px_rgba(48,35,0,0.12)] px-6 md:px-8 py-3 flex items-center justify-between"
+          className="fixed top-4 left-1/2 z-[90] w-[min(96vw,1100px)] backdrop-blur-xl bg-white/45 border border-white/40 rounded-full shadow-[0_8px_32px_rgba(48,35,0,0.12)] px-6 md:px-8 py-3 flex items-center justify-between"
           data-testid="sticky-navbar"
         >
           {/* Left: Logo */}

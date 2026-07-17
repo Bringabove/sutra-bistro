@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MapPin, Star, Clock, ExternalLink, ChevronUp, ChevronDown } from 'lucide-react';
+import FadeIn from './FadeIn';
 
 
 
@@ -21,12 +22,9 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: idx * 0.1 }}
-      className={`group flex flex-col bg-sutra-base/5 rounded-[2.5rem] overflow-hidden border border-sutra-deep/5 hover:border-sutra-accent/30 transition-all duration-500 shadow-sm hover:shadow-2xl relative ${isTemporarilyClosed ? 'opacity-70 grayscale-[0.8]' : ''}`}
+    <div
+      style={{ borderRadius: 'var(--theme-radius)' }}
+      className={`group flex flex-col bg-sutra-base/5 rounded-theme overflow-hidden border border-sutra-deep/5 hover:border-sutra-accent/30 transition-all duration-500 shadow-sm hover:shadow-2xl relative ${isTemporarilyClosed ? 'opacity-70 grayscale-[0.8]' : ''}`}
     >
       {/* Image Carousel Container */}
       <div className={`h-64 relative overflow-hidden ${isTemporarilyClosed ? '' : 'group-hover:opacity-100'}`}>
@@ -103,7 +101,7 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
         <div className="grid grid-cols-2 gap-3 mt-auto pt-6 border-t border-sutra-deep/5">
           <button 
             onClick={onOrderClick}
-            className="group/btn relative px-4 py-4 bg-sutra-deep text-sutra-base rounded-2xl font-heading font-bold uppercase tracking-widest text-[9px] flex items-center justify-center gap-2 hover:bg-sutra-accent hover:text-sutra-deep transition-all duration-500 shadow-lg active:scale-95"
+            className="group/btn relative px-4 py-4 bg-sutra-deep text-sutra-base rounded-theme font-heading font-bold uppercase tracking-widest text-[9px] flex items-center justify-center gap-2 hover:bg-sutra-accent hover:text-sutra-deep transition-all duration-500 shadow-lg active:scale-95"
           >
             <span>Order</span>
             <div className="flex -space-x-2 group-hover/btn:-space-x-1 transition-all duration-500">
@@ -116,14 +114,14 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
             href={loc.link} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-4 py-4 border-2 border-sutra-deep text-sutra-deep rounded-2xl font-heading font-bold uppercase tracking-widest text-[9px] hover:bg-sutra-deep hover:text-sutra-base transition-all duration-500 active:scale-95"
+            className="flex items-center justify-center gap-2 px-4 py-4 border-2 border-sutra-deep text-sutra-deep rounded-theme font-heading font-bold uppercase tracking-widest text-[9px] hover:bg-sutra-deep hover:text-sutra-base transition-all duration-500 active:scale-95"
           >
             <span>Directions</span>
             <ExternalLink size={12} />
           </a>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -259,7 +257,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
     <section 
       ref={sectionRef}
       id="about" 
-      className="bg-white py-24 md:py-40 relative overflow-hidden" 
+      className="bg-white py-24 md:py-40 relative overflow-hidden -mt-14 md:-mt-18 z-10 rounded-theme shadow-md" 
       data-testid="about-section"
     >
       {/* Background Decorative Text */}
@@ -269,7 +267,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <div className="max-w-2xl">
+          <FadeIn className="max-w-2xl">
             <div className="font-heading uppercase tracking-[0.4em] text-[10px] text-sutra-accent mb-6 flex items-center gap-3">
               <div className="w-8 h-[1px] bg-sutra-accent" />
               Who We Are
@@ -282,29 +280,23 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
               Sutra Bistro is where traditional flavors meet modern aesthetics. 
               Two branches, one soul.
             </p>
-          </div>
+          </FadeIn>
           <div className="flex-1 hidden lg:flex flex-col items-end relative">
             {/* Parallax Fries Overlay in Header */}
             <div className="relative w-full flex justify-end pr-10">
               <motion.div
-                style={{ y: friesY, rotate: friesRotate }}
-                initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
-                whileInView={{ opacity: 1, scale: 1, rotate: -10 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 className="relative z-0"
               >
-                <motion.div
-                  animate={{ y: [0, -30, 0], rotate: [-5, 5, -5] }}
-                  transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <img 
-                    src="/images/about-us/french-fries.png" 
-                    alt="Sutra French Fries" 
-                    className="w-full max-w-[450px] h-auto drop-shadow-[0_20px_40px_rgba(48,35,0,0.05)] opacity-90"
-                  />
-                  <div className="absolute inset-0 bg-sutra-accent/10 blur-[120px] rounded-full -z-10 animate-pulse" />
-                </motion.div>
+                <img 
+                  src="/images/about-us/french-fries.png" 
+                  alt="Sutra French Fries" 
+                  className="w-full max-w-[450px] h-auto drop-shadow-[0_20px_40px_rgba(48,35,0,0.05)] opacity-90"
+                />
+                <div className="absolute inset-0 bg-sutra-accent/10 blur-[120px] rounded-full -z-10 animate-pulse" />
               </motion.div>
             </div>
           </div>
@@ -313,7 +305,9 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
         {/* 3-Column Content Grid: Cards + Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative z-10">
           {locations.map((loc, idx) => (
-            <LocationCard key={loc.id || idx} loc={loc} idx={idx} onOrderClick={onOrderClick} />
+            <FadeIn key={loc.id || idx} delay={idx * 0.1}>
+              <LocationCard loc={loc} idx={idx} onOrderClick={onOrderClick} />
+            </FadeIn>
           ))}
 
           {/* Stats Counters in the 3rd slot */}

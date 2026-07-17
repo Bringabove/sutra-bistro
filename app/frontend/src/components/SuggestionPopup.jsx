@@ -3,6 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, UtensilsCrossed, Send, Sparkles } from 'lucide-react';
 
 const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.lenis?.stop();
+      return () => {
+        document.body.style.overflow = 'auto';
+        window.lenis?.start();
+      };
+    }
+  }, [isOpen]);
+
   const [DishName, setDishName] = useState('');
   const [SpecialDetails, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,10 +52,11 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
           />
           
           <motion.div
+            data-lenis-prevent
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-lg bg-sutra-base rounded-[3rem] overflow-hidden shadow-2xl border border-white/20"
+            className="relative w-full max-w-lg bg-sutra-base rounded-theme overflow-y-auto overscroll-contain max-h-[90vh] shadow-2xl border border-white/20"
           >
             {/* Header */}
             <div className="relative h-32 bg-sutra-deep flex items-center justify-center overflow-hidden">
@@ -99,7 +111,7 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
                         placeholder="e.g. Exotic Fruit Salad"
                         value={DishName}
                         onChange={(e) => setDishName(e.target.value)}
-                        className="w-full px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-2xl font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all"
+                        className="w-full px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all"
                       />
                     </div>
 
@@ -110,7 +122,7 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
                         placeholder="Describe how you'd like it..."
                         value={SpecialDetails}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-2xl font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all resize-none"
+                        className="w-full px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all resize-none"
                       />
                     </div>
                   </div>
@@ -118,7 +130,7 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
                   <button
                     disabled={isSubmitting}
                     type="submit"
-                    className="w-full bg-sutra-deep text-sutra-base py-5 rounded-2xl font-heading font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-sutra-accent hover:text-sutra-deep transition-all duration-500 shadow-xl disabled:opacity-50"
+                    className="w-full bg-sutra-deep text-sutra-base py-5 rounded-theme font-heading font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-sutra-accent hover:text-sutra-deep transition-all duration-500 shadow-xl disabled:opacity-50"
                   >
                     {isSubmitting ? 'Submitting...' : 'Send Suggestion'}
                     <Send size={14} />

@@ -6,6 +6,17 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
   const [selectedOrderBranch, setSelectedOrderBranch] = useState(null);
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.lenis?.stop();
+      return () => {
+        document.body.style.overflow = 'auto';
+        window.lenis?.start();
+      };
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     if (branches.length > 0 && !selectedOrderBranch) {
       setSelectedOrderBranch(branches[0]);
     }
@@ -41,10 +52,11 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
           />
           
           <motion.div 
+            data-lenis-prevent
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative w-full max-w-4xl bg-sutra-base rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] border border-white/20 flex flex-col md:flex-row h-auto md:min-h-[480px]"
+            className="relative w-full max-w-4xl bg-sutra-base rounded-theme overflow-y-auto overscroll-contain max-h-[90vh] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] border border-white/20 flex flex-col md:flex-row h-auto md:min-h-[480px]"
           >
             {/* Left Column: Branch Selection (Master) */}
             <div className="w-full md:w-[38%] bg-sutra-deep p-10 md:p-14 flex flex-col justify-between relative overflow-hidden">
@@ -60,7 +72,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                     <button 
                       key={idx}
                       onClick={() => setSelectedOrderBranch(b)}
-                      className={`w-full text-left px-8 py-5 rounded-2xl font-heading text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-500 flex items-center justify-between group border-2 ${selectedOrderBranch?.BranchName === b.BranchName ? 'bg-sutra-accent text-sutra-deep border-sutra-accent shadow-xl scale-105' : 'bg-white/5 text-sutra-base/40 border-white/5 hover:border-sutra-accent/50 hover:text-white'}`}
+                      className={`w-full text-left px-8 py-5 rounded-theme font-heading text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-500 flex items-center justify-between group border-2 ${selectedOrderBranch?.BranchName === b.BranchName ? 'bg-sutra-accent text-sutra-deep border-sutra-accent shadow-xl scale-105' : 'bg-white/5 text-sutra-base/40 border-white/5 hover:border-sutra-accent/50 hover:text-white'}`}
                     >
                       <span>{b.BranchName || b.name}</span>
                       <motion.div 
@@ -101,7 +113,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                   <a 
                     href={selectedOrderBranch.SwiggyLink}
                     target="_blank"
-                    className="group relative p-10 bg-sutra-deep/5 rounded-[2.5rem] border-2 border-transparent hover:border-sutra-accent hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-500 text-center"
+                    className="group relative p-10 bg-sutra-deep/5 rounded-theme border-2 border-transparent hover:border-sutra-accent hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-500 text-center"
                   >
                     <div className="relative w-20 h-20 mx-auto mb-8">
                       <img src="/images/hero/icons/swiggy.png" className="w-full h-full object-contain" alt="Swiggy" />
@@ -113,7 +125,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                     <span className="block font-heading font-bold uppercase tracking-[0.2em] text-xs md:text-sm text-sutra-deep group-hover:text-sutra-accent transition-colors">Swiggy</span>
                   </a>
                 ) : (
-                  <div className="p-10 bg-sutra-deep/[0.02] border-2 border-dashed border-sutra-deep/10 rounded-[2.5rem] flex flex-col items-center justify-center opacity-30 grayscale">
+                  <div className="p-10 bg-sutra-deep/[0.02] border-2 border-dashed border-sutra-deep/10 rounded-theme flex flex-col items-center justify-center opacity-30 grayscale">
                     <img src="/images/hero/icons/swiggy.png" className="w-16 h-16 object-contain opacity-50 mb-6" alt="Swiggy" />
                     <span className="font-heading font-bold uppercase tracking-widest text-xs">Offline</span>
                   </div>
@@ -124,7 +136,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                   <a 
                     href={selectedOrderBranch.ZomatoLink}
                     target="_blank"
-                    className="group relative p-10 bg-sutra-deep/5 rounded-[2.5rem] border-2 border-transparent hover:border-sutra-accent hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-500 text-center"
+                    className="group relative p-10 bg-sutra-deep/5 rounded-theme border-2 border-transparent hover:border-sutra-accent hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-500 text-center"
                   >
                     <div className="relative w-20 h-20 mx-auto mb-8">
                       <img src="/images/hero/icons/zomato.png" className="w-full h-full object-contain" alt="Zomato" />
@@ -136,7 +148,7 @@ const OrderPopup = ({ isOpen, onClose, branches = [] }) => {
                     <span className="block font-heading font-bold uppercase tracking-[0.2em] text-xs md:text-sm text-sutra-deep group-hover:text-sutra-accent transition-colors">Zomato</span>
                   </a>
                 ) : (
-                  <div className="p-10 bg-sutra-deep/[0.02] border-2 border-dashed border-sutra-deep/10 rounded-[2.5rem] flex flex-col items-center justify-center opacity-30 grayscale">
+                  <div className="p-10 bg-sutra-deep/[0.02] border-2 border-dashed border-sutra-deep/10 rounded-theme flex flex-col items-center justify-center opacity-30 grayscale">
                     <img src="/images/hero/icons/zomato.png" className="w-16 h-16 object-contain opacity-50 mb-6" alt="Zomato" />
                     <span className="font-heading font-bold uppercase tracking-widest text-xs">Offline</span>
                   </div>

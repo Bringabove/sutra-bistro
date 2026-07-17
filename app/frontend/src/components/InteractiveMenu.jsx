@@ -1,8 +1,15 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, ChevronRight, Star, ChevronUp, ChevronDown, MapPin, Leaf, Heart } from 'lucide-react';
+import FadeIn from './FadeIn';
 
-const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches = [], onSuggest }) => {
+const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest }) => {
+  const sheetCategories = categories && categories.length > 0 ? categories : [
+    { CategoryName: "Chinese & Fast Food", blurb: "Wok tossed perfection." },
+    { CategoryName: "North Indian & Chaat", blurb: "Authentic spices and flavors." },
+    { CategoryName: "Punjabi Paratas", blurb: "Hot from the tawa." }
+  ];
+
   // Use a fallback for the initial selected branch
   const firstBranchName = branches && branches.length > 0 ? (branches[0].BranchName || branches[0].name) : 'Vijay Nagar';
   const [selectedBranch, setSelectedBranch] = useState(firstBranchName); 
@@ -77,17 +84,12 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
   if (!hasData) return null;
 
   return (
-    <section id="menu" className="bg-sutra-base py-24 md:py-32 relative overflow-hidden" data-testid="menu-section">
+    <section id="menu" className="bg-sutra-base py-24 md:py-32 relative overflow-hidden rounded-theme" data-testid="menu-section">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header Section */}
         <div className="mb-16 md:mb-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-12"
-          >
+          <FadeIn className="flex flex-col gap-12">
             {/* Title Row & Badges */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
               <div className="max-w-2xl">
@@ -102,13 +104,13 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
               
               {/* Badges Container */}
               <div className="flex flex-wrap gap-4 mb-2">
-                <div className="flex items-center gap-2 bg-green-500/5 border border-green-500/20 px-4 py-2.5 rounded-2xl shadow-sm">
+                <div className="flex items-center gap-2 bg-green-500/5 border border-green-500/20 px-4 py-2.5 rounded-theme shadow-sm">
                   <div className="bg-green-500 p-1 rounded-full">
                     <Leaf size={10} className="text-white" fill="currentColor" />
                   </div>
                   <span className="font-heading text-[9px] uppercase tracking-widest text-green-700 font-bold">Pure Vegetarian</span>
                 </div>
-                <div className="flex items-center gap-2 bg-sutra-accent/5 border border-sutra-accent/20 px-4 py-2.5 rounded-2xl shadow-sm">
+                <div className="flex items-center gap-2 bg-sutra-accent/5 border border-sutra-accent/20 px-4 py-2.5 rounded-theme shadow-sm">
                   <div className="bg-sutra-accent p-1 rounded-full">
                     <Heart size={10} className="text-sutra-deep" fill="currentColor" />
                   </div>
@@ -117,19 +119,20 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
               </div>
             </div>
 
+
             {/* Controls Row: Tabs + Search */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 bg-white/30 backdrop-blur-md p-6 rounded-[2.5rem] border border-sutra-deep/5 shadow-sm relative z-50">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 bg-white/30 backdrop-blur-md p-6 rounded-theme border border-sutra-deep/5 shadow-sm relative z-40">
               {/* Branch Switcher Tabs */}
               <div className="flex flex-col gap-3">
                 <span className="font-heading uppercase tracking-[0.2em] text-[9px] text-sutra-deep/40 px-2">Select Branch</span>
-                <div className="flex bg-white/40 p-1.5 rounded-2xl border border-sutra-deep/5">
+                <div className="flex bg-white/40 p-1.5 rounded-theme border border-sutra-deep/5">
                   {(branches && branches.length > 0 ? branches : [{ BranchName: 'Vijay Nagar' }, { BranchName: 'Siddharthanagar' }]).map((branch, idx) => {
                     const bName = branch.BranchName || branch.name;
                     return (
                       <button
                         key={idx}
                         onClick={() => setSelectedBranch(bName)}
-                        className={`flex items-center gap-2 px-4 md:px-6 py-3 rounded-xl font-heading text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 ${selectedBranch === bName ? 'bg-sutra-deep text-sutra-base shadow-lg' : 'text-sutra-deep/60 hover:text-sutra-deep'}`}
+                        className={`flex items-center gap-2 px-4 md:px-6 py-3 rounded-theme font-heading text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 ${selectedBranch === bName ? 'bg-sutra-deep text-sutra-base shadow-lg' : 'text-sutra-deep/60 hover:text-sutra-deep'}`}
                       >
                         <MapPin size={12} className={selectedBranch === bName ? 'text-sutra-accent' : 'text-sutra-deep/40'} />
                         {bName}
@@ -142,7 +145,7 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
               {/* Search Bar Container */}
               <div className="relative w-full lg:w-96 group pt-5 lg:pt-0">
                 <div className="relative flex items-center">
-                  <div className="absolute left-3 p-2.5 bg-sutra-accent rounded-xl z-10 flex items-center justify-center shadow-lg">
+                  <div className="absolute left-3 p-2.5 bg-sutra-accent rounded-theme z-10 flex items-center justify-center shadow-lg">
                     <Search className="w-4 h-4 text-sutra-deep" strokeWidth={3} />
                   </div>
                   <input 
@@ -154,7 +157,7 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                       setShowSuggestions(true);
                     }}
                     onFocus={() => setShowSuggestions(true)}
-                    className="w-full pl-16 pr-6 py-4 bg-white border border-sutra-deep/10 rounded-2xl font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent/50 transition-all shadow-inner"
+                    className="w-full pl-16 pr-6 py-4 bg-white border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent/50 transition-all shadow-inner"
                   />
                   {searchQuery && (
                     <button onClick={() => setSearchQuery('')} className="absolute right-4 p-1 hover:bg-sutra-deep/5 rounded-full transition-colors">
@@ -170,7 +173,7 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 right-0 mt-3 bg-white rounded-3xl shadow-[0_30px_60px_rgba(48,35,0,0.15)] overflow-hidden z-[100] border border-sutra-deep/5"
+                      className="absolute top-full left-0 right-0 mt-3 bg-white rounded-theme shadow-[0_30px_60px_rgba(48,35,0,0.15)] overflow-hidden z-[100] border border-sutra-deep/5"
                     >
                       {suggestions.length > 0 ? (
                         suggestions.map((item, idx) => (
@@ -200,17 +203,17 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                 </AnimatePresence>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
 
         {/* Main Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
-          {/* Left Column: Categories List with Visible Scroll Arrows */}
+          {/* Left Column: Categories List */}
           <div className="lg:col-span-4 flex flex-col relative group/nav">
-            <div className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/30 mb-8 px-4 flex justify-between items-center">
+            <div className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/30 mb-6 lg:mb-8 px-4 flex justify-between items-center">
               <span>Categories</span>
-              <div className="flex gap-3">
+              <div className="hidden lg:flex gap-3">
                 <button 
                   onClick={() => scrollCategories('up')} 
                   className="w-8 h-8 rounded-full bg-sutra-deep text-sutra-base flex items-center justify-center hover:bg-sutra-accent hover:text-sutra-deep transition-all shadow-md"
@@ -226,9 +229,10 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
               </div>
             </div>
             
+            {/* Category List: Horizontal on Mobile, Vertical on Desktop */}
             <div 
               ref={categoryListRef}
-              className="flex flex-col max-h-[500px] overflow-y-auto no-scrollbar pr-4 space-y-3"
+              className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto max-h-auto lg:max-h-[500px] no-scrollbar pb-4 lg:pb-0 pr-0 lg:pr-4 space-x-3 lg:space-x-0 lg:space-y-3 snap-x lg:snap-none"
             >
               {sheetCategories.map((cat, idx) => {
                 const catName = cat.CategoryName || cat.name;
@@ -236,25 +240,25 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                   <button
                     key={idx}
                     onClick={() => setSelectedId(catName)}
-                    className={`group relative w-[calc(100%-8px)] text-left py-6 px-5 rounded-2xl transition-all duration-500 flex items-center justify-between ${selectedId === catName ? 'bg-sutra-deep text-sutra-base shadow-2xl' : 'hover:bg-white/40 text-sutra-deep/70'}`}
+                    className={`group relative snap-start shrink-0 lg:w-[calc(100%-8px)] text-left py-3 lg:py-6 px-5 lg:px-5 rounded-theme transition-all duration-500 flex items-center justify-between border ${selectedId === catName ? 'bg-sutra-deep text-sutra-base shadow-xl border-sutra-deep' : 'bg-white/40 lg:hover:bg-white/80 text-sutra-deep/70 border-sutra-deep/5'}`}
                   >
-                    <div className="flex items-center gap-6">
-                      <span className={`font-display text-xl transition-colors ${selectedId === catName ? 'text-sutra-accent' : 'text-sutra-deep/20'}`}>
+                    <div className="flex items-center gap-3 lg:gap-6">
+                      <span className={`hidden lg:block font-display text-xl transition-colors ${selectedId === catName ? 'text-sutra-accent' : 'text-sutra-deep/20'}`}>
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-display text-2xl lg:text-3xl uppercase tracking-tighter">
+                      <span className="font-display text-lg lg:text-3xl uppercase tracking-[0.05em] lg:tracking-tighter whitespace-nowrap">
                         {catName}
                       </span>
                     </div>
-                    <ChevronRight className={`w-5 h-5 transition-transform duration-500 ${selectedId === catName ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'}`} />
+                    <ChevronRight className={`hidden lg:block w-5 h-5 transition-transform duration-500 ${selectedId === catName ? 'translate-x-0 opacity-100 text-sutra-base' : '-translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 text-sutra-deep/40'}`} />
                   </button>
                 );
               })}
             </div>
             
-            {/* Visual fade indicators for scroll */}
-            <div className="absolute top-12 left-0 right-0 h-8 bg-gradient-to-b from-sutra-base to-transparent pointer-events-none z-10" />
-            <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-sutra-base to-transparent pointer-events-none z-10" />
+            {/* Visual fade indicators for scroll (Desktop Only) */}
+            <div className="hidden lg:block absolute top-12 left-0 right-0 h-8 bg-gradient-to-b from-sutra-base to-transparent pointer-events-none z-10" />
+            <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-sutra-base to-transparent pointer-events-none z-10" />
           </div>
 
           {/* Right Column: Category Details & Items */}
@@ -269,7 +273,7 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                 className="space-y-12"
               >
                 {/* Category Identity Card */}
-                <div className="relative h-64 md:h-80 rounded-[2.5rem] overflow-hidden group shadow-2xl">
+                <div className="relative h-64 md:h-80 rounded-theme overflow-hidden group shadow-2xl">
                   {(() => {
                     const catName = activeCategory.CategoryName || activeCategory.name;
                     const bannerMap = {
@@ -338,7 +342,7 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                             delay: idx * 0.1,
                             duration: isHighlighted ? 0.5 : 0.2
                           }}
-                          className={`group border-b border-sutra-deep/10 pb-6 flex flex-col gap-2 relative transition-all duration-500 ${isHighlighted ? 'border-sutra-accent/40 rounded-2xl p-4 -mx-4 z-10 shadow-[0_0_30px_rgba(255,150,0,0.15)]' : ''} ${!isAvailable ? 'opacity-40 grayscale pointer-events-none' : ''}`}
+                          className={`group border-b border-sutra-deep/10 pb-6 flex flex-col gap-2 relative transition-all duration-500 ${isHighlighted ? 'border-sutra-accent/40 rounded-theme p-4 -mx-4 z-10 shadow-[0_0_30px_rgba(255,150,0,0.15)]' : ''} ${!isAvailable ? 'opacity-40 grayscale pointer-events-none' : ''}`}
                         >
                           <div className="flex justify-between items-start gap-4">
                             <div className="flex flex-col gap-1">
@@ -374,7 +378,7 @@ const InteractiveMenu = ({ menu = [], categories: sheetCategories = [], branches
                     })}
                   </div>
                 ) : (
-                  <div className="py-20 text-center bg-white/20 rounded-[2.5rem] border border-dashed border-sutra-deep/10">
+                  <div className="py-20 text-center bg-white/20 rounded-theme border border-dashed border-sutra-deep/10">
                     <p className="font-heading text-sutra-deep/40 uppercase tracking-widest text-xs">No items in this category yet.</p>
                   </div>
                 )}

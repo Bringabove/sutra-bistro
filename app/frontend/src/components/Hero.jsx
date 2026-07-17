@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
 import { X, Utensils } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
 const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: rawScrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
+  });
+
+  const scrollYProgress = useSpring(rawScrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
   });
 
   // Map settings data to slides, falling back to premium local assets
@@ -57,14 +63,15 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
   const exitBlur = useTransform(scrollYProgress, [0, 0.4], [0, 10]);
   // Parallax transforms for images
   const assetY1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const assetX1 = useTransform(scrollYProgress, [0, 0.4], [0, 1500]); // Fly right
   const assetRotate1 = useTransform(scrollYProgress, [0, 1], [0, -15]);
   
-  const assetY2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const assetY2 = useTransform(scrollYProgress, [0, 0.4], [0, 1500]); // Fly down
   const assetRotate2 = useTransform(scrollYProgress, [0, 1], [0, 20]);
 
-  const assetExitScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.3]);
-  const assetExitBlur = useTransform(scrollYProgress, [0, 0.4], [0, 20]);
-  const assetExitOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const assetExitScale = useTransform(scrollYProgress, [0, 0.4], [1, 5]);
+  const assetExitBlur = useTransform(scrollYProgress, [0, 0.4], [0, 5]);
+  const assetExitOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 1]); // No opacity loss
 
   const assetBlurString = useTransform(assetExitBlur, (v) => `blur(${v}px)`);
   const blurString = useTransform(exitBlur, (v) => `blur(${v}px)`);
@@ -216,7 +223,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
               <span className={`font-heading text-[9px] tracking-[0.2em] transition-all duration-500 ${currentSlide === index ? 'text-sutra-accent opacity-100 translate-x-0' : 'text-sutra-base/20 opacity-0 translate-x-4 group-hover:opacity-40'}`}>
                 0{index + 1}
               </span>
-              <div className={`transition-all duration-700 overflow-hidden rounded-lg border ${currentSlide === index ? 'border-sutra-accent w-16 h-10 scale-110 shadow-2xl' : 'border-white/10 w-10 h-7 opacity-30 group-hover:opacity-100'}`}>
+              <div className={`transition-all duration-700 overflow-hidden rounded-theme border ${currentSlide === index ? 'border-sutra-accent w-16 h-10 scale-110 shadow-2xl' : 'border-white/10 w-10 h-7 opacity-30 group-hover:opacity-100'}`}>
                 <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" />
               </div>
             </div>
@@ -227,6 +234,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
       {/* Floating Images (Optimized Exit + Continuous Hover) */}
       <motion.div 
         style={{ 
+          x: assetX1,
           y: assetY1, 
           rotate: assetRotate1,
           scale: assetExitScale,

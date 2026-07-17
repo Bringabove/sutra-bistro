@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiInstagram as Instagram } from 'react-icons/fi';
 import MagneticButton from './MagneticButton';
+import FadeIn from './FadeIn';
 
 const InstagramWall = () => {
   const images = [
@@ -14,7 +15,7 @@ const InstagramWall = () => {
   ];
 
   return (
-    <section id="vibe" className="bg-white py-24 md:py-40 relative overflow-hidden" data-testid="instagram-section">
+    <section id="vibe" className="bg-white py-24 md:py-40 relative overflow-hidden rounded-theme shadow-md" data-testid="instagram-section">
       {/* Background Hashtag */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[22vw] text-sutra-deep opacity-[0.03] pointer-events-none select-none whitespace-nowrap z-0">
         #SUTRABISTRO
@@ -27,7 +28,7 @@ const InstagramWall = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <div className="max-w-2xl">
+          <FadeIn className="max-w-2xl">
             <div className="font-heading uppercase tracking-[0.4em] text-[10px] text-sutra-accent mb-6 flex items-center gap-3">
               <div className="w-8 h-[1px] bg-sutra-accent" />
               Social Proof {"·"} @sutrabistro
@@ -38,7 +39,7 @@ const InstagramWall = () => {
             <p className="font-heading text-sutra-deep/60 text-sm md:text-base uppercase tracking-widest leading-relaxed">
               Tag us <span className="text-sutra-deep font-bold">@sutrabistro</span> to get featured and also use <span className="text-sutra-deep font-bold">#sutrabistro</span>
             </p>
-          </div>
+          </FadeIn>
 
           <motion.a
             href="https://www.instagram.com/sutrabistro/"
@@ -64,7 +65,7 @@ const InstagramWall = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: idx * 0.08 }}
-              className="rounded-3xl overflow-hidden ring-1 ring-sutra-accent/30 group"
+              className="rounded-theme overflow-hidden ring-1 ring-sutra-accent/30 group"
               data-testid={`ig-tile-${idx}`}
             >
               <img 
@@ -81,7 +82,7 @@ const InstagramWall = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, delay: 0.24 }}
-            className="row-span-2 col-span-2 lg:col-span-2 rounded-3xl overflow-hidden ring-2 ring-sutra-accent bg-sutra-base/10"
+            className="row-span-2 col-span-2 lg:col-span-2 rounded-theme overflow-hidden ring-2 ring-sutra-accent bg-sutra-base/10"
             data-testid="ig-embed-wrap"
           >
             <iframe 
@@ -102,7 +103,7 @@ const InstagramWall = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: (idx + 4) * 0.08 }}
-              className="rounded-3xl overflow-hidden ring-1 ring-sutra-accent/30 group"
+              className="rounded-theme overflow-hidden ring-1 ring-sutra-accent/30 group"
               data-testid={`ig-tile-b-${idx}`}
             >
               <img 
