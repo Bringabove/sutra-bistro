@@ -28,8 +28,7 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
     >
       {/* Image Carousel Container */}
       <div className={`h-64 relative overflow-hidden ${isTemporarilyClosed ? '' : 'group-hover:opacity-100'}`}>
-        <picture className="w-full h-full block">
-          <source srcSet={loc.images[currentImg]?.replace(/\.(png|jpg|jpeg)$/i, '.webp')} type="image/webp" />
+        <div className="w-full h-full overflow-hidden relative">
           <motion.img 
             key={currentImg}
             initial={{ opacity: 0, scale: 1.1 }}
@@ -40,8 +39,11 @@ const LocationCard = ({ loc, idx, onOrderClick }) => {
             loading="lazy"
             width={600}
             height={256}
+            onError={(e) => {
+              console.error("Asset fallback resolution triggered for branch image:", loc.images[currentImg]);
+            }}
           />
-        </picture>
+        </div>
         
         {/* Status Badge - Floating Top Right */}
         <div className="absolute top-6 right-6 z-30 pointer-events-none">

@@ -293,8 +293,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                     
                     const convertedSrc = encodeURI(bannerSrc);
                     return (
-                      <picture className="w-full h-full block">
-                        <source srcSet={convertedSrc.replace(/\.(png|jpg|jpeg|gif)$/i, '.webp')} type="image/webp" />
+                      <div className="w-full h-full overflow-hidden relative">
                         <img 
                           src={convertedSrc} 
                           alt={catName} 
@@ -302,8 +301,11 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                           loading="lazy"
                           width={800}
                           height={320}
+                          onError={(e) => {
+                            console.error("Asset fallback resolution triggered for:", convertedSrc);
+                          }}
                         />
-                      </picture>
+                      </div>
                     );
                   })()}
                   <div className="absolute inset-0 bg-gradient-to-t from-sutra-deep via-sutra-deep/20 to-transparent opacity-80" />

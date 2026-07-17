@@ -376,8 +376,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
           {/* Right Side: Dynamic Image */}
           <div className="lg:w-2/5 min-h-[300px] lg:min-h-full relative overflow-hidden">
             <AnimatePresence mode="wait">
-              <picture className="absolute inset-0 w-full h-full block">
-                <source srcSet={(selectedBranch?.image || "/images/global/sutra-logo.png")?.replace(/\.(png|jpg|jpeg)$/i, '.webp')} type="image/webp" />
+              <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <motion.img 
                   key={selectedBranch?.id || 'default'}
                   initial={{ opacity: 0, scale: 1.2 }}
@@ -390,8 +389,11 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
                   loading="lazy"
                   width={480}
                   height={600}
+                  onError={(e) => {
+                    console.error("Asset fallback resolution triggered for branch image:", selectedBranch?.image);
+                  }}
                 />
-              </picture>
+              </div>
             </AnimatePresence>
             <div className="absolute inset-0 bg-gradient-to-r lg:bg-gradient-to-t from-sutra-deep/60 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
