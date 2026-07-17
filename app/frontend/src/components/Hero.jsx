@@ -105,13 +105,18 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             className="absolute inset-0 bg-sutra-deep"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-sutra-deep/70 via-sutra-deep/30 to-sutra-deep/70 z-10" />
-            <img 
-              src={slides[currentSlide].url} 
-              alt="Bistro Background" 
-              className="w-full h-full object-cover"
-              fetchPriority="high"
-              loading="eager"
-            />
+            <picture className="w-full h-full">
+              <source srcSet={slides[currentSlide].url} type="image/webp" />
+              <img 
+                src={slides[currentSlide].url} 
+                alt="Bistro Background" 
+                className="w-full h-full object-cover"
+                fetchPriority="high"
+                loading="eager"
+                width={1920}
+                height={1080}
+              />
+            </picture>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -126,7 +131,18 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             className="w-32 md:w-40" 
             data-testid="hero-logo"
           >
-            <img src="/images/global/sutra-logo.png" alt="Sutra Bistro Logo" className="w-full h-auto object-contain" fetchPriority="high" loading="eager" />
+            <picture className="w-full h-auto">
+              <source srcSet="/images/global/sutra-logo.webp" type="image/webp" />
+              <img 
+                src="/images/global/sutra-logo.png" 
+                alt="Sutra Bistro Logo" 
+                className="w-full h-auto object-contain" 
+                fetchPriority="high" 
+                loading="eager" 
+                width={160}
+                height={44}
+              />
+            </picture>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -203,8 +219,8 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
                 >
                   <span className="relative z-10">Order Online</span>
                   <div className="flex -space-x-3 group-hover:-space-x-1 transition-all duration-500 relative z-10">
-                    <img src="/images/hero/icons/swiggy.png" className="w-6 h-6 md:w-7 md:h-7 object-contain rounded-full bg-white p-1 ring-2 ring-sutra-deep/10" alt="Swiggy" />
-                    <img src="/images/hero/icons/zomato.png" className="w-6 h-6 md:w-7 md:h-7 object-contain rounded-full bg-white p-1 ring-2 ring-sutra-deep/10" alt="Zomato" />
+                    <img src="/images/hero/icons/swiggy.png" className="w-6 h-6 md:w-7 md:h-7 object-contain rounded-full bg-white p-1 ring-2 ring-sutra-deep/10" alt="Swiggy" width={28} height={28} />
+                    <img src="/images/hero/icons/zomato.png" className="w-6 h-6 md:w-7 md:h-7 object-contain rounded-full bg-white p-1 ring-2 ring-sutra-deep/10" alt="Zomato" width={28} height={28} />
                   </div>
                 </button>
               </div>
@@ -226,7 +242,10 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
                 0{index + 1}
               </span>
               <div className={`transition-all duration-700 overflow-hidden rounded-theme border ${currentSlide === index ? 'border-sutra-accent w-16 h-10 scale-110 shadow-2xl' : 'border-white/10 w-10 h-7 opacity-30 group-hover:opacity-100'}`}>
-                <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" />
+                <picture className="w-full h-full">
+                  <source srcSet={slide.url} type="image/webp" />
+                  <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" width={64} height={40} />
+                </picture>
               </div>
             </div>
           ))}
@@ -258,7 +277,18 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <img src="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).png" alt="Pizza Slice" className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" fetchPriority="high" loading="eager" />
+          <picture className="w-full h-full">
+            <source srcSet="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).webp" type="image/webp" />
+            <img 
+              src="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).png" 
+              alt="Pizza Slice" 
+              className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" 
+              fetchPriority="high" 
+              loading="eager" 
+              width={500}
+              height={500}
+            />
+          </picture>
         </motion.div>
       </motion.div>
 
@@ -286,7 +316,18 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <img src="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).png" alt="Mojito Cocktail" className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" fetchPriority="high" loading="eager" />
+          <picture className="w-full h-full">
+            <source srcSet="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).webp" type="image/webp" />
+            <img 
+              src="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).png" 
+              alt="Mojito Cocktail" 
+              className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" 
+              fetchPriority="high" 
+              loading="eager" 
+              width={500}
+              height={500}
+            />
+          </picture>
         </motion.div>
       </motion.div>
 

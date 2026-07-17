@@ -105,28 +105,32 @@ const SuggestionPopup = ({ isOpen, onClose, onSubmit }) => {
 
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label htmlFor="suggest-dish-name" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 ml-2">Dish Name *</label>
-                      <input 
-                        required
-                        id="suggest-dish-name"
-                        type="text" 
-                        placeholder="e.g. Exotic Fruit Salad"
-                        value={DishName}
-                        onChange={(e) => setDishName(e.target.value)}
-                        className="w-full px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all"
-                      />
+                      <label htmlFor="suggest-dish-name" className="block font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 ml-2 font-semibold">
+                        Dish Name *
+                        <input 
+                          required
+                          id="suggest-dish-name"
+                          type="text" 
+                          placeholder="e.g. Exotic Fruit Salad"
+                          value={DishName}
+                          onChange={(e) => setDishName(e.target.value)}
+                          className="w-full mt-2 px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all"
+                        />
+                      </label>
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="suggest-details" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 ml-2">Any special details? (Optional)</label>
-                      <textarea 
-                        id="suggest-details"
-                        rows={3}
-                        placeholder="Describe how you'd like it..."
-                        value={SpecialDetails}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className="w-full px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all resize-none"
-                      />
+                      <label htmlFor="suggest-details" className="block font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 ml-2 font-semibold">
+                        Any special details? (Optional)
+                        <textarea 
+                          id="suggest-details"
+                          rows={3}
+                          placeholder="Describe how you'd like it..."
+                          value={SpecialDetails}
+                          onChange={(e) => setDescription(e.target.value)}
+                          className="w-full mt-2 px-6 py-4 bg-white/50 border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent focus:bg-white transition-all resize-none"
+                        />
+                      </label>
                     </div>
                   </div>
 

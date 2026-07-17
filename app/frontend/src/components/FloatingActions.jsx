@@ -57,7 +57,7 @@ const FloatingActions = ({ settings = {}, branches = [] }) => {
               title="WhatsApp"
               aria-label="Chat on WhatsApp"
             >
-              <img src="/images/contact-us/whatsapp.svg" alt="WhatsApp" className="w-7 h-7 object-contain" />
+              <img src="/images/contact-us/whatsapp.svg" alt="WhatsApp" className="w-7 h-7 object-contain" width={28} height={28} />
               <span className="absolute right-16 bg-sutra-deep text-sutra-base px-3 py-1 rounded-theme text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">WhatsApp Us</span>
             </a>
           </motion.div>

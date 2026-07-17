@@ -92,103 +92,119 @@ const Footer = ({ onReserve, isSubmitting, branches = [], settings = {} }) => {
           <div className="lg:col-span-7">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 relative z-20" data-testid="reservation-form">
               <div className="group">
-                <label htmlFor="reserve-name" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Your Name</label>
-                <input 
-                  id="reserve-name"
-                  type="text" 
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors placeholder-sutra-base/40"
-                  placeholder="Rahul Sharma"
-                  data-testid="form-name"
-                />
+                <label htmlFor="reserve-name" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Your Name
+                  <input 
+                    id="reserve-name"
+                    type="text" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors placeholder-sutra-base/65 mt-1"
+                    placeholder="Rahul Sharma"
+                    data-testid="form-name"
+                  />
+                </label>
               </div>
               <div className="group">
-                <label htmlFor="reserve-phone" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Phone</label>
-                <input 
-                  id="reserve-phone"
-                  type="tel" 
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors placeholder-sutra-base/40"
-                  placeholder="+91 XXXXX XXXXX"
-                  data-testid="form-phone"
-                />
+                <label htmlFor="reserve-phone" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Phone
+                  <input 
+                    id="reserve-phone"
+                    type="tel" 
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors placeholder-sutra-base/65 mt-1"
+                    placeholder="+91 XXXXX XXXXX"
+                    data-testid="form-phone"
+                  />
+                </label>
               </div>
               <div className="group">
-                <label htmlFor="reserve-email" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Email (Optional)</label>
-                <input 
-                  id="reserve-email"
-                  type="email" 
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors placeholder-sutra-base/40"
-                  placeholder="rahul@example.com"
-                  data-testid="form-email"
-                />
+                <label htmlFor="reserve-email" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Email (Optional)
+                  <input 
+                    id="reserve-email"
+                    type="email" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors placeholder-sutra-base/65 mt-1"
+                    placeholder="rahul@example.com"
+                    data-testid="form-email"
+                  />
+                </label>
               </div>
               <div className="group">
-                <label htmlFor="reserve-location" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Location</label>
-                <select 
-                  id="reserve-location"
-                  value={formData.branch}
-                  onChange={(e) => setFormData({...formData, branch: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors"
-                  data-testid="form-location"
-                >
-                  {locations.map((loc, i) => (
-                    <option key={i} value={loc.name} className="text-sutra-deep">
-                      {loc.name}
-                    </option>
-                  ))}
-                </select>
+                <label htmlFor="reserve-location" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Location
+                  <select 
+                    id="reserve-location"
+                    value={formData.branch}
+                    onChange={(e) => setFormData({...formData, branch: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors mt-1"
+                    data-testid="form-location"
+                  >
+                    {locations.map((loc, i) => (
+                      <option key={i} value={loc.name} className="text-sutra-deep">
+                        {loc.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
               <div className="group">
-                <label htmlFor="reserve-date" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Date</label>
-                <input 
-                  id="reserve-date"
-                  type="date" 
-                  value={formData.date}
-                  onChange={(e) => setFormData({...formData, date: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors [color-scheme:dark]"
-                  data-testid="form-date"
-                />
+                <label htmlFor="reserve-date" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Date
+                  <input 
+                    id="reserve-date"
+                    type="date" 
+                    value={formData.date}
+                    onChange={(e) => setFormData({...formData, date: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors [color-scheme:dark] mt-1"
+                    data-testid="form-date"
+                  />
+                </label>
               </div>
               <div className="group">
-                <label htmlFor="reserve-time" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Time</label>
-                <input 
-                  id="reserve-time"
-                  type="time" 
-                  value={formData.time}
-                  onChange={(e) => setFormData({...formData, time: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors [color-scheme:dark]"
-                  data-testid="form-time"
-                />
+                <label htmlFor="reserve-time" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Time
+                  <input 
+                    id="reserve-time"
+                    type="time" 
+                    value={formData.time}
+                    onChange={(e) => setFormData({...formData, time: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors [color-scheme:dark] mt-1"
+                    data-testid="form-time"
+                  />
+                </label>
               </div>
               <div className="group">
-                <label htmlFor="reserve-guests" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Guests</label>
-                <input 
-                  id="reserve-guests"
-                  type="number" 
-                  min="1" 
-                  max="30"
-                  value={formData.guests}
-                  onChange={(e) => setFormData({...formData, guests: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors"
-                  data-testid="form-guests"
-                />
+                <label htmlFor="reserve-guests" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Guests
+                  <input 
+                    id="reserve-guests"
+                    type="number" 
+                    min="1" 
+                    max="30"
+                    value={formData.guests}
+                    onChange={(e) => setFormData({...formData, guests: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors mt-1"
+                    data-testid="form-guests"
+                  />
+                </label>
               </div>
               <div className="group md:col-span-2">
-                <label htmlFor="reserve-message" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/85 group-focus-within:text-sutra-accent transition-colors font-bold">Anything special?</label>
-                <input 
-                  id="reserve-message"
-                  type="text"
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors resize-none placeholder-sutra-base/40"
-                  placeholder="Special requests..."
-                  data-testid="form-message"
-                />
+                <label htmlFor="reserve-message" className="block font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-base/90 group-focus-within:text-sutra-accent transition-colors font-bold">
+                  Anything special?
+                  <input 
+                    id="reserve-message"
+                    type="text"
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="w-full bg-transparent border-0 border-b border-sutra-base/30 focus:border-sutra-accent py-3 font-heading text-lg text-sutra-base outline-none transition-colors resize-none placeholder-sutra-base/65 mt-1"
+                    placeholder="Special requests..."
+                    data-testid="form-message"
+                  />
+                </label>
               </div>
 
               <div className="md:col-span-2 pt-8">

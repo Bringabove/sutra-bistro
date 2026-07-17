@@ -271,7 +271,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <FadeIn className="max-w-2xl">
-            <div className="font-heading uppercase tracking-[0.4em] text-[10px] text-sutra-accent mb-6 flex items-center gap-3">
+            <div className="font-heading uppercase tracking-[0.4em] text-[10px] text-sutra-deep/80 mb-6 flex items-center gap-3 font-bold">
               <div className="w-8 h-[1px] bg-sutra-accent" />
               Who We Are
             </div>
@@ -322,7 +322,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
               <span className="font-display text-5xl md:text-7xl text-sutra-accent leading-none">
                 <NumberCounter value="200" suffix="+" />
               </span>
-              <span className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/40 mt-2">
+              <span className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/80 mt-2 font-bold">
                 Customers Daily
               </span>
             </div>
@@ -330,7 +330,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
               <span className="font-display text-5xl md:text-7xl text-sutra-deep leading-none">
                 20<SlotCounter value="16" />
               </span>
-              <span className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/40 mt-2">
+              <span className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/80 mt-2 font-bold">
                 Established Since
               </span>
             </div>

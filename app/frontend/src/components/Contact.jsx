@@ -66,6 +66,8 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                   src="/images/contact-us/contact-us-sutra.webp" 
                   alt="Sutra Chef" 
                   className="w-full h-auto object-contain block drop-shadow-[20px_0_50px_rgba(0,0,0,0.3)]"
+                  width={500}
+                  height={500}
                 />
               </motion.div>
 
@@ -125,52 +127,60 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="contact-name" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Your Name</label>
-                  <input 
-                    required
-                    id="contact-name"
-                    type="text" 
-                    className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
-                    placeholder="Rahul Sharma"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  />
+                  <label htmlFor="contact-name" className="block font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">
+                    Your Name
+                    <input 
+                      required
+                      id="contact-name"
+                      type="text" 
+                      className="w-full mt-2 px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
+                      placeholder="Rahul Sharma"
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    />
+                  </label>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="contact-phone" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Phone Number</label>
-                  <input 
-                    required
-                    id="contact-phone"
-                    type="tel" 
-                    className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
-                    placeholder="+91 XXXXX XXXXX"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  />
+                  <label htmlFor="contact-phone" className="block font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">
+                    Phone Number
+                    <input 
+                      required
+                      id="contact-phone"
+                      type="tel" 
+                      className="w-full mt-2 px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
+                      placeholder="+91 XXXXX XXXXX"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    />
+                  </label>
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <label htmlFor="contact-email" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Email (Optional)</label>
-                  <input 
-                    id="contact-email"
-                    type="email" 
-                    className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
-                    placeholder="rahul@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  />
+                  <label htmlFor="contact-email" className="block font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">
+                    Email (Optional)
+                    <input 
+                      id="contact-email"
+                      type="email" 
+                      className="w-full mt-2 px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all font-heading text-sm text-sutra-deep" 
+                      placeholder="rahul@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    />
+                  </label>
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="contact-message" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Message</label>
-                <textarea 
-                  required
-                  id="contact-message"
-                  rows="4" 
-                  className="w-full px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all resize-none font-heading text-sm text-sutra-deep" 
-                  placeholder="What's on your mind?"
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                ></textarea>
+                <label htmlFor="contact-message" className="block font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">
+                  Message
+                  <textarea 
+                    required
+                    id="contact-message"
+                    rows="4" 
+                    className="w-full mt-2 px-6 py-4 bg-sutra-base/30 border border-sutra-deep/5 rounded-theme outline-none focus:border-sutra-accent/50 transition-all resize-none font-heading text-sm text-sutra-deep" 
+                    placeholder="What's on your mind?"
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  ></textarea>
+                </label>
               </div>
               <button 
                 disabled={isSubmitting || success}
