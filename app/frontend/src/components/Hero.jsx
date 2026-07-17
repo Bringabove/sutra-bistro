@@ -94,7 +94,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
       data-testid="hero-section"
     >
       {/* Background Carousel (Cross-fade Optimized) */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-sutra-deep">
         <AnimatePresence>
           <motion.div
             key={currentSlide}
@@ -102,7 +102,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.1 }}
             transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
-            className="absolute inset-0"
+            className="absolute inset-0 bg-sutra-deep"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-sutra-deep/70 via-sutra-deep/30 to-sutra-deep/70 z-10" />
             <img 

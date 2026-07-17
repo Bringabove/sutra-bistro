@@ -63,6 +63,13 @@ const TestimonialCard = ({ name, content, rating = 5 }) => (
   </div>
 );
 
+const getOptimizedVideoUrl = (url) => {
+  if (url && url.includes('cloudinary.com') && url.includes('/video/upload/')) {
+    return url.replace('/video/upload/', '/video/upload/q_auto,f_auto,w_1280,vc_auto/');
+  }
+  return url;
+};
+
 const VideoCard = ({ url, onClick }) => {
   return (
     <div 
@@ -70,11 +77,12 @@ const VideoCard = ({ url, onClick }) => {
       className="my-4 mx-2 w-full aspect-[9/16] rounded-theme overflow-hidden bg-sutra-deep/5 border border-sutra-deep/10 shadow-lg group relative cursor-pointer"
     >
       <video 
-        src={url}
+        src={getOptimizedVideoUrl(url)}
         autoPlay
         muted
         loop
         playsInline
+        preload="none"
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
       />
       
@@ -125,9 +133,10 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
             {/* Main Player Area - Compact & Rounded */}
             <div className="flex-1 bg-black/5 flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
               <video
-                src={activeVideo}
+                src={getOptimizedVideoUrl(activeVideo)}
                 autoPlay
                 controls
+                preload="metadata"
                 className="h-full w-auto max-w-full object-contain rounded-theme shadow-2xl border border-white/5"
               />
             </div>
@@ -147,8 +156,9 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
                       className={`relative aspect-[9/16] w-full rounded-theme overflow-hidden border-2 transition-all flex-shrink-0 ${activeVideo === url ? 'border-sutra-accent scale-95 shadow-lg shadow-sutra-accent/20' : 'border-transparent opacity-40 hover:opacity-100 hover:scale-105'}`}
                     >
                       <video
-                        src={url}
+                        src={getOptimizedVideoUrl(url)}
                         muted
+                        preload="none"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-transparent" />

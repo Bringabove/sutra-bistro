@@ -5,16 +5,26 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    let cachedInnerHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+
+    const handleResize = () => {
+      cachedInnerHeight = window.innerHeight;
+    };
+
     const handleScroll = () => {
-      if (window.scrollY > 0.6 * window.innerHeight) {
+      if (window.scrollY > 0.6 * cachedInnerHeight) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
     };
 
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const navLinks = [

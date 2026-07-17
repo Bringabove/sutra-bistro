@@ -125,7 +125,7 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="contact-name" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Your Name</label>
+                  <label htmlFor="contact-name" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Your Name</label>
                   <input 
                     required
                     id="contact-name"
@@ -137,7 +137,7 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="contact-phone" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Phone Number</label>
+                  <label htmlFor="contact-phone" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Phone Number</label>
                   <input 
                     required
                     id="contact-phone"
@@ -149,7 +149,7 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <label htmlFor="contact-email" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Email (Optional)</label>
+                  <label htmlFor="contact-email" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Email (Optional)</label>
                   <input 
                     id="contact-email"
                     type="email" 
@@ -161,7 +161,7 @@ const Contact = ({ onContact, isSubmitting, settings = {} }) => {
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="contact-message" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/40 px-2 font-bold">Message</label>
+                <label htmlFor="contact-message" className="font-heading text-[10px] uppercase tracking-widest text-sutra-deep/75 px-2 font-semibold">Message</label>
                 <textarea 
                   required
                   id="contact-message"

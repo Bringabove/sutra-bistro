@@ -135,8 +135,8 @@ function App() {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 0.95,
-      touchMultiplier: 1.2,
-      syncTouch: true
+      touchMultiplier: 1.0,
+      syncTouch: false
     });
     window.lenis = lenis;
 
@@ -147,11 +147,20 @@ function App() {
     }
     frameId = requestAnimationFrame(raf);
 
-    // Sync Lenis scroll updates with Framer Motion scroll rendering
-    window.addEventListener('resize', () => lenis.resize());
+    // Sync Lenis scroll updates with Framer Motion scroll rendering, optimized using requestAnimationFrame style debouncing
+    let resizeTimeout;
+    const handleResize = () => {
+      if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
+      resizeTimeout = requestAnimationFrame(() => {
+        lenis.resize();
+      });
+    };
+    window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(frameId);
+      if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
+      window.removeEventListener('resize', handleResize);
       lenis.destroy();
       window.lenis = null;
     };
