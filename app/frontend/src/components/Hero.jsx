@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
 import { X, Utensils } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import pizzaImg from '../assets/pizza.webp';
+import mojitoImg from '../assets/mojito.webp';
 
 const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -274,18 +276,20 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <picture className="w-full h-full">
-            <source srcSet="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).webp" type="image/webp" />
+          <div className="w-full h-auto overflow-hidden relative">
             <img 
-              src="/images/hero/—Pngtree—mouth-watering pepperoni pizza slice_20340457 (1).png" 
+              src={pizzaImg} 
               alt="Pizza Slice" 
               className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" 
               fetchPriority="high" 
               loading="eager" 
-              width={500}
-              height={500}
+              width={600}
+              height={600}
+              onError={(e) => {
+                console.error("Asset fallback resolution triggered for:", pizzaImg);
+              }}
             />
-          </picture>
+          </div>
         </motion.div>
       </motion.div>
 
@@ -313,18 +317,20 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <picture className="w-full h-full">
-            <source srcSet="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).webp" type="image/webp" />
+          <div className="w-full h-auto overflow-hidden relative">
             <img 
-              src="/images/hero/—Pngtree—classic mojito cocktail with rum_19931748 (1).png" 
-              alt="Mojito Cocktail" 
+              src={mojitoImg} 
+              alt="Mojito" 
               className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" 
               fetchPriority="high" 
               loading="eager" 
-              width={500}
-              height={500}
+              width={600}
+              height={600}
+              onError={(e) => {
+                console.error("Asset fallback resolution triggered for:", mojitoImg);
+              }}
             />
-          </picture>
+          </div>
         </motion.div>
       </motion.div>
 
