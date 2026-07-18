@@ -5,7 +5,7 @@ import { Star, MapPin, ExternalLink, Quote, X, Maximize2 } from 'lucide-react';
 import FadeIn from './FadeIn';
 
 const branchLinks = [
-  { id: "vjn", name: "Vijay Nagar", short: "01", url: "https://g.page/sutra-vjn/review", image: "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png" },
+  { id: "vjn", name: "Vijay Nagar", short: "01", url: "https://g.page/sutra-vjn/review", image: "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.webp" },
   { id: "sid", name: "Siddharthanagar", short: "02", url: "https://g.page/sutra-sid/review", image: "/images/branches/siddartha-layout/sutra-bistro-siddartha-layout-1.png" }
 ];
 
@@ -65,7 +65,7 @@ const TestimonialCard = ({ name, content, rating = 5 }) => (
 
 const getOptimizedVideoUrl = (url) => {
   if (url && url.includes('cloudinary.com') && url.includes('/video/upload/')) {
-    return url.replace('/video/upload/', '/video/upload/q_auto:eco,f_auto,vc_vp9,w_1280,br_1.5m/');
+    return url.replace('/video/upload/', '/video/upload/q_auto,f_auto,w_1280,vc_vp9/');
   }
   return url;
 };
@@ -216,7 +216,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
 
   // Fallback branch links if sheet is empty
   const defaultBranchLinks = [
-    { id: "vjn", name: "Vijay Nagar", short: "01", url: "https://g.page/sutra-vjn/review", image: "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png" },
+    { id: "vjn", name: "Vijay Nagar", short: "01", url: "https://g.page/sutra-vjn/review", image: "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.webp" },
     { id: "sid", name: "Siddharthanagar", short: "02", url: "https://g.page/sutra-sid/review", image: "/images/branches/siddartha-layout/sutra-bistro-siddartha-layout-1.png" }
   ];
 
@@ -226,7 +226,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
     let branchImage = "/images/global/sutra-logo.png"; // Fallback
 
     if (lowerName.includes("vijay")) {
-      branchImage = "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png";
+      branchImage = "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.webp";
     } else if (lowerName.includes("siddartha") || lowerName.includes("siddhartha")) {
       branchImage = "/images/branches/siddartha-layout/sutra-bistro-siddartha-layout-1.png";
     }
@@ -244,7 +244,7 @@ const Testimonials = ({ testimonials = [], branches = [] }) => {
     const vijay = initialLinks.find(b => (b.BranchName || b.name || "").toLowerCase().includes("vijay"));
     if (vijay) {
       const name = vijay.BranchName || vijay.name;
-      let branchImage = "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png";
+      let branchImage = "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.webp";
       return {
         id: name?.toLowerCase().replace(/\s+/g, '-'),
         name: name,

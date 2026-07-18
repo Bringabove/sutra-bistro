@@ -229,7 +229,7 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
 
     if (lowerName.includes("vijay")) {
       branchImages = [
-        "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.png",
+        "/images/branches/vijayanagar/sutra-bistro-vijayanagar-1.webp",
         "/images/branches/vijayanagar/sutra-bistro-vijayanagar-2.png",
         "/images/branches/vijayanagar/sutra-bistro-vijayanagar-3.png"
       ];
