@@ -71,12 +71,23 @@ const getOptimizedVideoUrl = (url) => {
 };
 
 const VideoCard = ({ url, onClick, isLoaded }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div 
       onClick={onClick}
       className="my-4 mx-2 w-full aspect-[9/16] rounded-theme overflow-hidden bg-sutra-deep/5 border border-sutra-deep/10 shadow-lg group relative cursor-pointer"
     >
-      {isLoaded ? (
+      {isLoaded && !isMobile ? (
         <video 
           src={getOptimizedVideoUrl(url)}
           autoPlay
@@ -170,11 +181,13 @@ const VideoPopup = ({ isOpen, onClose, videos, initialVideo }) => {
                       onClick={() => setActiveVideo(url)}
                       className={`relative aspect-[9/16] w-full rounded-theme overflow-hidden border-2 transition-all flex-shrink-0 ${activeVideo === url ? 'border-sutra-accent scale-95 shadow-lg shadow-sutra-accent/20' : 'border-transparent opacity-40 hover:opacity-100 hover:scale-105'}`}
                     >
-                      <video
-                        src={getOptimizedVideoUrl(url)}
-                        muted
-                        preload="none"
+                      <img 
+                        src={thumb}
+                        alt="Video Thumbnail"
                         className="w-full h-full object-cover"
+                        loading="lazy"
+                        width={280}
+                        height={490}
                       />
                       <div className="absolute inset-0 bg-transparent" />
                     </button>

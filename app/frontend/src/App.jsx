@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import DeliveryMarquee from './components/DeliveryMarquee';
-import InteractiveMenu from './components/InteractiveMenu';
-import InstagramWall from './components/InstagramWall';
-import AboutUs from './components/AboutUs';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import FloatingActions from './components/FloatingActions';
-import OrderPopup from './components/OrderPopup';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { AlertCircle, X, Loader2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AlertCircle, X } from 'lucide-react';
 import Lenis from 'lenis';
-
-import SuggestionPopup from './components/SuggestionPopup';
 import FadeIn from './components/FadeIn';
+
+// Lazy load below-the-fold components to reduce initial main-thread bundle footprint
+const DeliveryMarquee = React.lazy(() => import('./components/DeliveryMarquee'));
+const AboutUs = React.lazy(() => import('./components/AboutUs'));
+const InteractiveMenu = React.lazy(() => import('./components/InteractiveMenu'));
+const Testimonials = React.lazy(() => import('./components/Testimonials'));
+const InstagramWall = React.lazy(() => import('./components/InstagramWall'));
+const Contact = React.lazy(() => import('./components/Contact'));
+const Footer = React.lazy(() => import('./components/Footer'));
+const FloatingActions = React.lazy(() => import('./components/FloatingActions'));
+const OrderPopup = React.lazy(() => import('./components/OrderPopup'));
+const SuggestionPopup = React.lazy(() => import('./components/SuggestionPopup'));
 
 // Live Google Apps Script Web App URL (Fallback for unsupported actions)
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbyoCVd3F3Fvxefk0iOE4ki1PqrKhrHD5bucCxPwu0mXmdUoDID2Kr2spYzYKOKCXk46/exec';
@@ -286,22 +287,30 @@ function App() {
           branches={appData.branches} 
           onOrderClick={() => setIsOrderPopupOpen(true)}
         />
-        <DeliveryMarquee 
-          onOrderClick={() => setIsOrderPopupOpen(true)}
-          text={appData.settings?.MarqueeText || "Taste the soul of Mysuru · Pure Veg Excellence · Visit us today!"} 
-        />
-        <FadeIn>
-          <AboutUs 
-            branches={appData.branches} 
+        <Suspense fallback={<div className="h-14 bg-sutra-deep" />}>
+          <DeliveryMarquee 
             onOrderClick={() => setIsOrderPopupOpen(true)}
+            text={appData.settings?.MarqueeText || "Taste the soul of Mysuru · Pure Veg Excellence · Visit us today!"} 
           />
-        </FadeIn>
-        <InteractiveMenu 
-          menu={appData.menu} 
-          categories={appData.categories} 
-          branches={appData.branches} 
-          onSuggest={() => setIsSuggestionPopupOpen(true)}
-        />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-[600px] bg-white" />}>
+          <FadeIn>
+            <AboutUs 
+              branches={appData.branches} 
+              onOrderClick={() => setIsOrderPopupOpen(true)}
+            />
+          </FadeIn>
+        </Suspense>
+
+        <Suspense fallback={<div className="h-[900px] bg-sutra-base" />}>
+          <InteractiveMenu 
+            menu={appData.menu} 
+            categories={appData.categories} 
+            branches={appData.branches} 
+            onSuggest={() => setIsSuggestionPopupOpen(true)}
+          />
+        </Suspense>
         
         {/* Suggestion Section */}
         <FadeIn>
@@ -327,25 +336,46 @@ function App() {
             </div>
           </div>
         </FadeIn>
-        <FadeIn>
-          <Testimonials testimonials={appData.testimonials} branches={appData.branches} />
-        </FadeIn>
-        <InstagramWall />
-        <FadeIn>
-          <Contact onContact={submitForm} isSubmitting={isSubmitting} settings={appData.settings} />
-        </FadeIn>
-        <Footer onReserve={submitForm} isSubmitting={isSubmitting} branches={appData.branches} settings={appData.settings} />
-        <FloatingActions settings={appData.settings} branches={appData.branches} />
-        <OrderPopup 
-          isOpen={isOrderPopupOpen} 
-          onClose={() => setIsOrderPopupOpen(false)} 
-          branches={appData.branches} 
-        />
-        <SuggestionPopup 
-          isOpen={isSuggestionPopupOpen}
-          onClose={() => setIsSuggestionPopupOpen(false)}
-          onSubmit={submitForm}
-        />
+
+        <Suspense fallback={<div className="h-[800px] bg-sutra-base" />}>
+          <FadeIn>
+            <Testimonials testimonials={appData.testimonials} branches={appData.branches} />
+          </FadeIn>
+        </Suspense>
+
+        <Suspense fallback={<div className="h-[400px] bg-sutra-base" />}>
+          <InstagramWall />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-[500px] bg-sutra-base" />}>
+          <FadeIn>
+            <Contact onContact={submitForm} isSubmitting={isSubmitting} settings={appData.settings} />
+          </FadeIn>
+        </Suspense>
+
+        <Suspense fallback={<div className="h-[400px] bg-sutra-deep" />}>
+          <Footer onReserve={submitForm} isSubmitting={isSubmitting} branches={appData.branches} settings={appData.settings} />
+        </Suspense>
+
+        <Suspense fallback={null}>
+          <FloatingActions settings={appData.settings} branches={appData.branches} />
+        </Suspense>
+
+        <Suspense fallback={null}>
+          <OrderPopup 
+            isOpen={isOrderPopupOpen} 
+            onClose={() => setIsOrderPopupOpen(false)} 
+            branches={appData.branches} 
+          />
+        </Suspense>
+
+        <Suspense fallback={null}>
+          <SuggestionPopup 
+            isOpen={isSuggestionPopupOpen}
+            onClose={() => setIsSuggestionPopupOpen(false)}
+            onSubmit={submitForm}
+          />
+        </Suspense>
       </main>
     </ErrorBoundary>
   );

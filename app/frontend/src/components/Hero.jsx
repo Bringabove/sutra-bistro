@@ -107,8 +107,9 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             className="absolute inset-0 bg-sutra-deep"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-sutra-deep/70 via-sutra-deep/30 to-sutra-deep/70 z-10" />
-            <picture className="w-full h-full">
-              <source srcSet={slides[currentSlide].url} type="image/webp" />
+            <picture className="w-full h-full block">
+              <source media="(max-width: 767px)" srcSet={slides[currentSlide].url.replace('.webp', '-mobile.webp')} type="image/webp" />
+              <source media="(min-width: 768px)" srcSet={slides[currentSlide].url} type="image/webp" />
               <img 
                 src={slides[currentSlide].url} 
                 alt="Bistro Background" 
