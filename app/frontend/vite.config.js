@@ -22,7 +22,22 @@ export default defineConfig({
       webp: {
         quality: 80,
       },
-    })
+    }),
+    {
+      name: 'preload-css-assets',
+      transformIndexHtml(html, { bundle }) {
+        if (!bundle) return html;
+        const cssFiles = Object.keys(bundle).filter(key => key.endsWith('.css'));
+        const tags = cssFiles.map(file => `<link rel="preload" href="/${file}" as="style" />`).join('\n    ');
+        if (tags) {
+          return html.replace(
+            '<link rel="preconnect" href="https://sutra-bistro-api.onrender.com"',
+            `${tags}\n    <link rel="preconnect" href="https://sutra-bistro-api.onrender.com"`
+          );
+        }
+        return html;
+      }
+    }
   ],
   server: {
     proxy: {

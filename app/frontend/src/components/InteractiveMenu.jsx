@@ -280,7 +280,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                   {(() => {
                     const catName = activeCategory.CategoryName || activeCategory.name;
                     const bannerMap = {
-                      "Chinese & Fast Food": "/images/menu/categories/Chinese & Fast Food/chinese-food.png",
+                      "Chinese & Fast Food": "/images/menu/categories/Chinese & Fast Food/chinese_food.webp",
                       "North Indian & Chaat": "/images/menu/categories/North Indian & Chaat/north-indian-chats.jpg",
                       "Punjabi Paratas": "/images/menu/categories/Punjabi Paratas/panjabi-parata.webp",
                       "Freak Shakes & Frappes": "/images/menu/categories/Freak Shakes & Frappes/Freak Shakes & Frappes.jpg",
