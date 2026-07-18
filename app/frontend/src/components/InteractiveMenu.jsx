@@ -121,20 +121,20 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
 
 
             {/* Controls Row: Tabs + Search */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 bg-white/30 backdrop-blur-md p-6 rounded-theme border border-sutra-deep/5 shadow-sm relative z-40">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-8 bg-white/30 backdrop-blur-md p-3 md:p-6 rounded-theme border border-sutra-deep/5 shadow-sm relative z-40">
               {/* Branch Switcher Tabs */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1.5 md:gap-3">
                 <span className="font-heading uppercase tracking-[0.2em] text-[9px] text-sutra-deep/75 px-2 font-bold">Select Branch</span>
-                <div className="flex bg-white/40 p-1.5 rounded-theme border border-sutra-deep/5">
+                <div className="flex bg-white/40 p-1 md:p-1.5 rounded-theme border border-sutra-deep/5">
                   {(branches && branches.length > 0 ? branches : [{ BranchName: 'Vijay Nagar' }, { BranchName: 'Siddharthanagar' }]).map((branch, idx) => {
                     const bName = branch.BranchName || branch.name;
                     return (
                       <button
                         key={idx}
                         onClick={() => setSelectedBranch(bName)}
-                        className={`flex items-center gap-2 px-4 md:px-6 py-3 rounded-theme font-heading text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 ${selectedBranch === bName ? 'bg-sutra-deep text-sutra-base shadow-lg' : 'text-sutra-deep/60 hover:text-sutra-deep'}`}
+                        className={`flex items-center gap-2 px-3 md:px-6 py-2 md:py-3 rounded-theme font-heading text-[9px] md:text-xs uppercase tracking-widest transition-all duration-300 ${selectedBranch === bName ? 'bg-sutra-deep text-sutra-base shadow-lg' : 'text-sutra-deep/60 hover:text-sutra-deep'}`}
                       >
-                        <MapPin size={12} className={selectedBranch === bName ? 'text-sutra-accent' : 'text-sutra-deep/40'} />
+                        <MapPin size={11} className={selectedBranch === bName ? 'text-sutra-accent' : 'text-sutra-deep/40'} />
                         {bName}
                       </button>
                     );
@@ -143,10 +143,10 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
               </div>
 
               {/* Search Bar Container */}
-              <div className="relative w-full lg:w-96 group pt-5 lg:pt-0">
+              <div className="relative w-full lg:w-96 group pt-1 lg:pt-0">
                 <div className="relative flex items-center">
-                  <div className="absolute left-3 p-2.5 bg-sutra-accent rounded-theme z-10 flex items-center justify-center shadow-lg">
-                    <Search className="w-4 h-4 text-sutra-deep" strokeWidth={3} />
+                  <div className="absolute left-2.5 p-1.5 md:left-3 md:p-2.5 bg-sutra-accent rounded-theme z-10 flex items-center justify-center shadow-lg">
+                    <Search className="w-3.5 h-3.5 text-sutra-deep" strokeWidth={3} />
                   </div>
                   <label htmlFor="dish-search" className="sr-only">Search for a dish</label>
                   <input 
@@ -160,7 +160,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                       setShowSuggestions(true);
                     }}
                     onFocus={() => setShowSuggestions(true)}
-                    className="w-full pl-16 pr-6 py-4 bg-white border border-sutra-deep/10 rounded-theme font-heading text-sm text-sutra-deep outline-none focus:border-sutra-accent/50 transition-all shadow-inner"
+                    className="w-full pl-12 pr-6 py-2.5 md:pl-16 md:py-4 bg-white border border-sutra-deep/10 rounded-theme font-heading text-xs md:text-sm text-sutra-deep outline-none focus:border-sutra-accent/50 transition-all shadow-inner"
                   />
                   {searchQuery && (
                     <button onClick={() => setSearchQuery('')} aria-label="Clear search query" className="absolute right-4 p-1 hover:bg-sutra-deep/5 rounded-full transition-colors">
@@ -213,8 +213,8 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
           {/* Left Column: Categories List */}
-          <div className="lg:col-span-4 flex flex-col relative group/nav">
-            <div className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/30 mb-6 lg:mb-8 px-4 flex justify-between items-center">
+          <div className="lg:col-span-4 flex flex-col sticky top-20 lg:relative lg:top-auto z-45 bg-sutra-base/95 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none py-3 lg:py-0 px-6 -mx-6 lg:px-0 lg:mx-0 border-b border-sutra-deep/5 lg:border-b-0 group/nav">
+            <div className="hidden lg:flex font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/30 mb-6 lg:mb-8 px-4 justify-between items-center">
               <span>Categories</span>
               <div className="hidden lg:flex gap-3">
                 <button 
@@ -235,25 +235,32 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
             {/* Category List: Horizontal on Mobile, Vertical on Desktop */}
             <div 
               ref={categoryListRef}
-              className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto max-h-auto lg:max-h-[500px] no-scrollbar pb-4 lg:pb-0 pr-0 lg:pr-4 space-x-3 lg:space-x-0 lg:space-y-3 snap-x lg:snap-none"
+              className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto max-h-auto lg:max-h-[500px] no-scrollbar pb-1 lg:pb-0 pr-0 lg:pr-4 space-x-2.5 lg:space-x-0 lg:space-y-3 snap-x lg:snap-none"
             >
               {sheetCategories.map((cat, idx) => {
                 const catName = cat.CategoryName || cat.name;
+                const isActive = selectedId === catName;
                 return (
                   <button
                     key={idx}
                     onClick={() => setSelectedId(catName)}
-                    className={`group relative snap-start shrink-0 lg:w-[calc(100%-8px)] text-left py-3 lg:py-6 px-5 lg:px-5 rounded-theme transition-all duration-500 flex items-center justify-between border ${selectedId === catName ? 'bg-sutra-deep text-sutra-base shadow-xl border-sutra-deep' : 'bg-white/40 lg:hover:bg-white/80 text-sutra-deep/70 border-sutra-deep/5'}`}
+                    className={`snap-start shrink-0 transition-all duration-300 flex items-center justify-between border 
+                      rounded-full px-4 py-2 text-xs font-semibold
+                      lg:w-[calc(100%-8px)] lg:text-left lg:py-6 lg:px-5 lg:rounded-theme lg:border
+                      ${isActive 
+                        ? 'bg-sutra-accent text-sutra-deep border-sutra-accent lg:bg-sutra-deep lg:text-sutra-base lg:border-sutra-deep shadow-md lg:shadow-xl' 
+                        : 'bg-white/40 border-sutra-deep/10 text-sutra-deep/70 lg:hover:bg-white/80 lg:border-sutra-deep/5'
+                      }`}
                   >
                     <div className="flex items-center gap-3 lg:gap-6">
-                      <span className={`hidden lg:block font-display text-xl transition-colors ${selectedId === catName ? 'text-sutra-accent' : 'text-sutra-deep/20'}`}>
+                      <span className={`hidden lg:block font-display text-xl transition-colors ${isActive ? 'text-sutra-accent' : 'text-sutra-deep/20'}`}>
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-display text-lg lg:text-3xl uppercase tracking-[0.05em] lg:tracking-tighter whitespace-nowrap">
+                      <span className="font-heading lg:font-display text-[9px] lg:text-3xl uppercase tracking-wider lg:tracking-tighter whitespace-nowrap">
                         {catName}
                       </span>
                     </div>
-                    <ChevronRight className={`hidden lg:block w-5 h-5 transition-transform duration-500 ${selectedId === catName ? 'translate-x-0 opacity-100 text-sutra-base' : '-translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 text-sutra-deep/40'}`} />
+                    <ChevronRight className={`hidden lg:block w-5 h-5 transition-transform duration-500 ${isActive ? 'translate-x-0 opacity-100 text-sutra-base' : '-translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 text-sutra-deep/40'}`} />
                   </button>
                 );
               })}
@@ -276,7 +283,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                 className="space-y-12"
               >
                 {/* Category Identity Card */}
-                <div className="relative h-64 md:h-80 rounded-theme overflow-hidden group shadow-2xl">
+                <div className="relative h-24 md:h-80 rounded-theme overflow-hidden group shadow-md md:shadow-2xl">
                   {(() => {
                     const catName = activeCategory.CategoryName || activeCategory.name;
                     const bannerMap = {
@@ -293,7 +300,7 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                     
                     const convertedSrc = encodeURI(bannerSrc);
                     return (
-                      <div className="w-full h-full overflow-hidden relative">
+                      <div className="w-full h-full overflow-hidden relative opacity-85 md:opacity-100">
                         <img 
                           src={convertedSrc} 
                           alt={catName} 
@@ -308,9 +315,9 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                       </div>
                     );
                   })()}
-                  <div className="absolute inset-0 bg-gradient-to-t from-sutra-deep via-sutra-deep/20 to-transparent opacity-80" />
-                  <div className="absolute bottom-10 left-10 right-10">
-                    <div className="flex items-center gap-2 mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-t from-sutra-deep via-sutra-deep/30 to-transparent opacity-80" />
+                  <div className="absolute bottom-3 left-4 right-4 md:bottom-10 md:left-10 md:right-10 flex flex-col md:block">
+                    <div className="hidden md:flex items-center gap-2 mb-4">
                       <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full shadow-lg">
                         <MapPin size={10} className="text-sutra-accent" />
                         <span className="font-heading text-[9px] uppercase tracking-[0.2em] text-white font-bold">
@@ -318,17 +325,17 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                         </span>
                       </div>
                     </div>
-                    <h3 className="font-display text-5xl md:text-6xl text-white uppercase mb-4 leading-none">{activeCategory.CategoryName || activeCategory.name}</h3>
-                    <p className="font-heading italic text-sutra-base/70 text-sm md:text-base max-w-lg">{activeCategory.CategoryBlurb || activeCategory.blurb}</p>
+                    <h3 className="font-display text-xl md:text-5xl text-white uppercase md:mb-4 leading-none">{activeCategory.CategoryName || activeCategory.name}</h3>
+                    <p className="hidden md:block font-heading italic text-sutra-base/70 text-sm md:text-base max-w-lg">{activeCategory.CategoryBlurb || activeCategory.blurb}</p>
                   </div>
-                  <div className="absolute top-8 right-8 bg-sutra-accent w-14 h-14 rounded-full flex items-center justify-center text-sutra-deep shadow-xl">
+                  <div className="hidden md:flex absolute top-8 right-8 bg-sutra-accent w-14 h-14 rounded-full items-center justify-center text-sutra-deep shadow-xl">
                     <Star className="w-6 h-6 fill-current" />
                   </div>
                 </div>
 
                 {/* Items List */}
                 {filteredItems.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 px-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-8 px-2">
                     {filteredItems.map((item, idx) => {
                       // Live Availability Logic from Sheet
                       let isAvailable = false;
@@ -354,36 +361,28 @@ const InteractiveMenu = ({ menu = [], categories = [], branches = [], onSuggest 
                             delay: idx * 0.1,
                             duration: isHighlighted ? 0.5 : 0.2
                           }}
-                          className={`group border-b border-sutra-deep/10 pb-6 flex flex-col gap-2 relative transition-all duration-500 ${isHighlighted ? 'border-sutra-accent/40 rounded-theme p-4 -mx-4 z-10 shadow-[0_0_30px_rgba(255,150,0,0.15)]' : ''} ${!isAvailable ? 'opacity-40 grayscale pointer-events-none' : ''}`}
+                          className={`group border-b border-sutra-deep/10 pb-3 md:pb-6 flex flex-col gap-1.5 md:gap-2 relative transition-all duration-500 ${isHighlighted ? 'border-sutra-accent/40 rounded-theme p-4 -mx-4 z-10 shadow-[0_0_30px_rgba(255,150,0,0.15)]' : ''} ${!isAvailable ? 'opacity-40 grayscale pointer-events-none' : ''}`}
                         >
                           <div className="flex justify-between items-start gap-4">
-                            <div className="flex flex-col gap-1">
-                              <h4 className="font-display text-2xl uppercase text-sutra-deep group-hover:text-sutra-accent transition-colors leading-none">{item.ItemName}</h4>
-                              {item.Tag && (
-                                <div className="flex">
-                                  <span className="bg-sutra-accent/10 text-sutra-accent px-2 py-0.5 rounded-full font-heading text-[7px] uppercase tracking-widest font-bold">
+                            <div className="flex flex-col gap-1 flex-1">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <h4 className="font-display text-lg md:text-2xl uppercase text-sutra-deep group-hover:text-sutra-accent transition-colors leading-none">{item.ItemName}</h4>
+                                {item.Tag && (
+                                  <span className="bg-sutra-accent/15 text-sutra-accent px-2 py-0.5 rounded-full font-heading text-[7px] uppercase tracking-widest font-bold inline-block leading-none">
                                     {item.Tag}
                                   </span>
-                                </div>
-                              )}
-                            </div>
-                            <div className="flex flex-col items-end gap-2 shrink-0">
-                              <span className="font-heading font-bold text-xl text-sutra-deep leading-none">₹{item.Price}</span>
-                              <div className="z-10">
-                                {!isAvailable ? (
-                                  <span className="bg-red-600 text-white px-2 py-0.5 rounded-[4px] text-[6px] uppercase tracking-widest font-bold shadow-sm whitespace-nowrap">
-                                    Currently Not Available
-                                  </span>
-                                ) : (
-                                  <span className="bg-green-600/10 text-green-600 px-2 py-0.5 rounded-[4px] text-[6px] uppercase tracking-widest font-bold border border-green-600/20 whitespace-nowrap">
-                                    Available
-                                  </span>
                                 )}
+                                <span className={`inline-block font-heading text-[6px] uppercase tracking-widest px-1.5 py-0.5 rounded-[4px] font-bold leading-none ${!isAvailable ? 'bg-red-600 text-white' : 'bg-green-600/10 text-green-600 border border-green-600/20'}`}>
+                                  {isAvailable ? 'Available' : 'Unavailable'}
+                                </span>
                               </div>
+                            </div>
+                            <div className="shrink-0 flex items-start">
+                              <span className="font-heading font-bold text-base md:text-xl text-sutra-deep leading-none">₹{item.Price}</span>
                             </div>
                           </div>
                           {item.Description && (
-                            <p className="font-heading text-xs md:text-sm text-sutra-deep/60 leading-relaxed max-w-[85%] mt-1">{item.Description}</p>
+                            <p className="font-heading text-[10px] md:text-sm text-sutra-deep/60 leading-tight max-w-[90%] mt-1">{item.Description}</p>
                           )}
                         </motion.div>
                       );
