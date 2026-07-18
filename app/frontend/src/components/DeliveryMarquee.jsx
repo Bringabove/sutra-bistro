@@ -15,7 +15,7 @@ const DeliveryMarquee = ({ onOrderClick }) => {
   const Item = ({ item }) => {
     if (item.type === 'text') {
       return (
-        <span className="font-display text-2xl md:text-4xl tracking-tight mx-6 uppercase whitespace-nowrap">
+        <span className="font-display text-sm md:text-4xl tracking-tight mx-3 md:mx-6 uppercase whitespace-nowrap">
           {item.value}
         </span>
       );
@@ -24,19 +24,19 @@ const DeliveryMarquee = ({ onOrderClick }) => {
     return (
       <button
         onClick={onOrderClick}
-        className="flex items-center gap-3 px-6 py-2.5 rounded-full bg-sutra-deep text-sutra-base font-heading uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all duration-300 mx-6 shadow-md"
+        className="flex items-center gap-1.5 md:gap-3 px-3.5 md:px-6 py-1.5 md:py-2.5 rounded-full bg-sutra-deep text-sutra-base font-heading uppercase tracking-widest text-[8px] md:text-xs hover:scale-105 transition-all duration-300 mx-3 md:mx-6 shadow-md"
         data-testid={`marquee-${item.value.toLowerCase().includes('swiggy') ? 'swiggy' : 'zomato'}-btn`}
       >
-        <Icon className="text-lg md:text-xl" style={{ color: item.color }} />
+        <Icon className="text-xs md:text-xl" style={{ color: item.color }} />
         {item.value}
       </button>
     );
   };
 
   return (
-    <div className="relative py-6 md:py-8 overflow-hidden bg-transparent select-none z-20 w-[105vw] left-[-2.5vw] -mt-12 md:-mt-16" data-testid="delivery-marquee">
+    <div className="relative py-2 md:py-6 overflow-hidden bg-transparent select-none z-20 w-[105vw] left-[-2.5vw] -mt-12 md:-mt-16" data-testid="delivery-marquee">
       <div 
-        className="bg-sutra-accent text-sutra-deep border-y-2 border-sutra-deep py-6 md:py-8 scale-[1.05] overflow-y-hidden"
+        className="bg-sutra-accent text-sutra-deep border-y-2 border-sutra-deep py-2 md:py-6 scale-[1.05] overflow-y-hidden"
         style={{ transform: 'skewY(-2deg)', outline: '1px solid #d89d03', backfaceVisibility: 'hidden' }}
       >
         <Marquee speed={60} gradient={false} pauseOnHover>

@@ -325,20 +325,20 @@ const AboutUs = ({ branches = [], onOrderClick }) => {
           ))}
 
           {/* Stats Counters in the 3rd slot */}
-          <div className="flex flex-col justify-end gap-10 text-right pr-6 pb-6">
+          <div className="grid grid-cols-2 md:flex md:flex-col gap-6 md:gap-10 text-center md:text-right px-4 md:px-0 md:pr-6 md:pb-6 items-center md:items-end justify-center">
             <div className="flex flex-col">
-              <span className="font-display text-5xl md:text-7xl text-sutra-accent leading-none">
+              <span className="font-display text-3xl md:text-7xl text-sutra-accent leading-none">
                 <NumberCounter value="200" suffix="+" />
               </span>
-              <span className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/80 mt-2 font-bold">
+              <span className="font-heading uppercase tracking-[0.3em] text-[9px] md:text-[10px] text-sutra-deep/80 mt-2 font-bold">
                 Customers Daily
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="font-display text-5xl md:text-7xl text-sutra-deep leading-none">
+              <span className="font-display text-3xl md:text-7xl text-sutra-deep leading-none">
                 20<SlotCounter value="16" />
               </span>
-              <span className="font-heading uppercase tracking-[0.3em] text-[10px] text-sutra-deep/80 mt-2 font-bold">
+              <span className="font-heading uppercase tracking-[0.3em] text-[9px] md:text-[10px] text-sutra-deep/80 mt-2 font-bold">
                 Established Since
               </span>
             </div>

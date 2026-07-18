@@ -49,6 +49,14 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
     }
   ];
 
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -125,7 +133,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
       {/* Main Content Wrapper */}
       <div className="relative flex-1 flex flex-col z-20">
         {/* Top Mini-Bar */}
-        <div className="px-6 md:px-12 pt-8 flex justify-between items-start z-20">
+        <div className="px-6 md:px-12 pt-8 flex justify-between items-start z-50">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -253,20 +261,47 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
         </div>
 
         {/* Mobile Minimalist Pagination Indicator */}
-        <div className="md:hidden flex flex-col items-center gap-2.5 w-full max-w-[180px] mb-2 mx-auto justify-center select-none pointer-events-none">
-          <div className="font-heading text-[10px] tracking-[0.25em] text-sutra-base/90 flex items-center justify-center gap-1.5">
-            <span className="text-sutra-accent font-bold">0{currentSlide + 1}</span>
-            <span className="text-sutra-base/30">/</span>
-            <span>0{slides.length}</span>
+        <div className="md:hidden flex items-center justify-between w-full max-w-[210px] mb-2 mx-auto select-none gap-3 pointer-events-auto">
+          {/* Left Arrow Button */}
+          <button 
+            type="button"
+            onClick={handlePrev}
+            className="p-2.5 bg-white/5 border border-white/10 rounded-full text-sutra-base hover:text-sutra-accent hover:border-sutra-accent/50 transition-all pointer-events-auto active:scale-90"
+            aria-label="Previous Slide"
+          >
+            <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Centered Tracker & Dashes */}
+          <div className="flex flex-col items-center gap-1 flex-1 justify-center">
+            <div className="font-heading text-[10px] tracking-[0.2em] text-sutra-base/80">
+              <span className="text-sutra-accent font-bold">0{currentSlide + 1}</span>
+              <span className="text-sutra-base/30"> / </span>
+              <span>0{slides.length}</span>
+            </div>
+            <div className="flex items-center justify-center gap-1.5 w-full">
+              {slides.map((_, idx) => (
+                <div 
+                  key={idx}
+                  className={`w-6 border-b-2 border-dashed transition-colors duration-300 ${currentSlide === idx ? 'border-sutra-accent' : 'border-white/20'}`}
+                />
+              ))}
+            </div>
           </div>
-          <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden relative">
-            <motion.div 
-              className="absolute left-0 top-0 bottom-0 bg-sutra-accent"
-              initial={{ width: "0%" }}
-              animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            />
-          </div>
+
+          {/* Right Arrow Button */}
+          <button 
+            type="button"
+            onClick={handleNext}
+            className="p-2.5 bg-white/5 border border-white/10 rounded-full text-sutra-base hover:text-sutra-accent hover:border-sutra-accent/50 transition-all pointer-events-auto active:scale-90"
+            aria-label="Next Slide"
+          >
+            <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </motion.div>
 
@@ -280,7 +315,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           opacity: assetExitOpacity,
           filter: assetBlurString
         }}
-        className="absolute top-[12%] left-[10%] right-auto md:top-[18%] md:right-[5%] md:left-auto w-[33vw] md:w-[18vw] aspect-square pointer-events-none select-none z-0"
+        className="absolute top-[24%] left-[10%] right-auto md:top-[18%] md:right-[5%] md:left-auto w-[33vw] md:w-[18vw] aspect-square pointer-events-none select-none z-0"
         data-testid="floating-png-pizza-slice"
       >
         <motion.div
