@@ -123,7 +123,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
       </div>
 
       {/* Main Content Wrapper */}
-      <div className="relative flex-1 flex flex-col z-10">
+      <div className="relative flex-1 flex flex-col z-20">
         {/* Top Mini-Bar */}
         <div className="px-6 md:px-12 pt-8 flex justify-between items-start z-20">
           <motion.div 
@@ -205,7 +205,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
               <div className="flex flex-row justify-start items-center gap-3 mt-4 w-full md:w-auto">
                 <a 
                   href="#menu"
-                  className="group relative px-4 md:px-8 py-3 bg-sutra-accent text-sutra-deep font-heading font-bold uppercase tracking-widest text-[9px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-1.5 h-11"
+                  className="group relative px-4 md:px-8 py-3 bg-sutra-accent text-sutra-deep font-heading font-bold uppercase tracking-widest text-[9px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-1.5 h-11 pointer-events-auto"
                 >
                   <Utensils size={13} className="relative z-10" />
                   <span className="relative z-10">View Menu</span>
@@ -213,7 +213,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
                 </a>
                 <button 
                   onClick={onOrderClick}
-                  className="group relative px-3 md:px-8 py-3 border border-sutra-base/30 text-sutra-base font-heading font-bold uppercase tracking-widest text-[9px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 hover:bg-sutra-base hover:text-sutra-deep active:scale-95 flex items-center justify-center gap-1.5 h-11"
+                  className="group relative px-3 md:px-8 py-3 border border-sutra-base/30 text-sutra-base font-heading font-bold uppercase tracking-widest text-[9px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 hover:bg-sutra-base hover:text-sutra-deep active:scale-95 flex items-center justify-center gap-1.5 h-11 pointer-events-auto"
                 >
                   <span className="relative z-10">Order Online</span>
                   <div className="flex -space-x-2 group-hover:-space-x-1 transition-all duration-500 relative z-10">
@@ -227,26 +227,46 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
         </div>
       </div>
 
-      {/* Repositioned Navigation (Horizontal Swipe on Mobile / Compact Bottom Right on Desktop) */}
+      {/* Navigation (Minimalist Pagination Tracker on Mobile / Compact Bottom Right on Desktop) */}
       <motion.div 
         style={{ opacity: exitOpacity, y: useTransform(scrollYProgress, [0, 0.5], [0, 50]) }}
         className="absolute left-0 bottom-4 w-full flex flex-col items-center md:items-end md:right-12 md:bottom-24 md:left-auto md:w-auto gap-2 md:gap-4 z-30 px-6 md:px-0"
       >
-        <div className="hidden md:block w-[1px] h-8 bg-sutra-accent/30 mb-1 origin-bottom" />
-        <div className="flex flex-row md:flex-col gap-3 overflow-x-auto md:overflow-visible w-full md:w-auto scrollbar-none justify-center snap-x snap-mandatory">
-          {slides.map((slide, index) => (
-            <div key={slide.id} className="flex items-center gap-3 group cursor-pointer justify-end snap-center" onClick={() => setCurrentSlide(index)}>
-              <span className={`hidden md:inline font-heading text-[9px] tracking-[0.2em] transition-all duration-500 ${currentSlide === index ? 'text-sutra-accent opacity-100 translate-x-0' : 'text-sutra-base/20 opacity-0 translate-x-4 group-hover:opacity-40'}`}>
-                0{index + 1}
-              </span>
-              <div className={`transition-all duration-700 overflow-hidden rounded-theme border shrink-0 ${currentSlide === index ? 'border-sutra-accent w-16 h-16 md:w-16 md:h-10 md:scale-110 shadow-2xl' : 'border-white/10 w-16 h-16 md:w-10 md:h-7 opacity-75 md:opacity-30 group-hover:opacity-100'}`}>
-                <picture className="w-full h-full">
-                  <source srcSet={slide.url} type="image/webp" />
-                  <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" width={64} height={64} />
-                </picture>
+        {/* Desktop Vertical Thumbnail Stack */}
+        <div className="hidden md:flex flex-col items-end gap-4">
+          <div className="w-[1px] h-8 bg-sutra-accent/30 mb-1 origin-bottom" />
+          <div className="flex flex-col gap-3">
+            {slides.map((slide, index) => (
+              <div key={slide.id} className="flex items-center gap-3 group cursor-pointer justify-end" onClick={() => setCurrentSlide(index)}>
+                <span className={`font-heading text-[9px] tracking-[0.2em] transition-all duration-500 ${currentSlide === index ? 'text-sutra-accent opacity-100 translate-x-0' : 'text-sutra-base/20 opacity-0 translate-x-4 group-hover:opacity-40'}`}>
+                  0{index + 1}
+                </span>
+                <div className={`transition-all duration-700 overflow-hidden rounded-theme border ${currentSlide === index ? 'border-sutra-accent w-16 h-10 scale-110 shadow-2xl' : 'border-white/10 w-10 h-7 opacity-30 group-hover:opacity-100'}`}>
+                  <picture className="w-full h-full">
+                    <source srcSet={slide.url} type="image/webp" />
+                    <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" width={64} height={40} />
+                  </picture>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Minimalist Pagination Indicator */}
+        <div className="md:hidden flex flex-col items-center gap-2.5 w-full max-w-[180px] mb-2 mx-auto justify-center select-none pointer-events-none">
+          <div className="font-heading text-[10px] tracking-[0.25em] text-sutra-base/90 flex items-center justify-center gap-1.5">
+            <span className="text-sutra-accent font-bold">0{currentSlide + 1}</span>
+            <span className="text-sutra-base/30">/</span>
+            <span>0{slides.length}</span>
+          </div>
+          <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden relative">
+            <motion.div 
+              className="absolute left-0 top-0 bottom-0 bg-sutra-accent"
+              initial={{ width: "0%" }}
+              animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            />
+          </div>
         </div>
       </motion.div>
 
@@ -260,7 +280,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           opacity: assetExitOpacity,
           filter: assetBlurString
         }}
-        className="absolute top-[8%] right-[-10%] md:top-[18%] md:right-[5%] w-[45vw] md:w-[18vw] aspect-square pointer-events-none select-none z-10"
+        className="absolute top-[12%] left-[10%] right-auto md:top-[18%] md:right-[5%] md:left-auto w-[33vw] md:w-[18vw] aspect-square pointer-events-none select-none z-0"
         data-testid="floating-png-pizza-slice"
       >
         <motion.div
@@ -300,7 +320,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           opacity: assetExitOpacity,
           filter: assetBlurString
         }}
-        className="absolute bottom-[-5%] left-[-15%] md:bottom-auto md:left-auto md:top-[35%] md:right-[45%] w-[65vw] md:w-[30vw] aspect-square pointer-events-none select-none z-10"
+        className="absolute bottom-[5%] right-[-15%] md:bottom-auto md:left-auto md:top-[35%] md:right-[45%] w-[50vw] md:w-[30vw] aspect-square pointer-events-none select-none z-0"
         data-testid="floating-png-mojito"
       >
         <motion.div
