@@ -90,7 +90,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
     <section 
       id="top"
       ref={containerRef}
-      className="relative h-[110vh] bg-sutra-base overflow-hidden flex flex-col"
+      className="relative h-[85vh] md:h-[110vh] bg-sutra-base overflow-hidden flex flex-col"
       data-testid="hero-section"
     >
       {/* Background Carousel (Cross-fade Optimized) */}
@@ -104,14 +104,14 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
             className="absolute inset-0 bg-sutra-deep"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-sutra-deep/70 via-sutra-deep/30 to-sutra-deep/70 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-sutra-deep/80 via-sutra-deep/40 to-sutra-deep/80 z-10" />
             <picture className="w-full h-full block">
               <source media="(max-width: 767px)" srcSet={slides[currentSlide].url.replace('.webp', '-mobile.webp')} type="image/webp" />
               <source media="(min-width: 768px)" srcSet={slides[currentSlide].url} type="image/webp" />
               <img 
                 src={slides[currentSlide].url} 
                 alt="Bistro Background" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
                 fetchPriority="high"
                 loading="eager"
                 width={1920}
@@ -166,7 +166,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
               </motion.div>
             </div>
             
-            <h1 className="font-display text-[16vw] md:text-[9.5vw] leading-[0.78] text-sutra-base uppercase" data-testid="hero-title">
+            <h1 className="font-display text-[11vw] md:text-[9.5vw] leading-[0.82] text-sutra-base uppercase" data-testid="hero-title">
               <div className="overflow-hidden">
                 <motion.span 
                   key={`title-${currentSlide}`}
@@ -189,36 +189,36 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
             </h1>
           </motion.div>
 
-          <div className="flex flex-col md:flex-row gap-8 md:items-end justify-between">
+          <div className="flex flex-col md:flex-row gap-8 md:items-end justify-between font-medium">
             <div className="max-w-xl">
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="font-heading font-bold text-xl md:text-2xl mb-4 leading-tight text-sutra-base" 
+                className="font-heading font-bold text-base md:text-2xl mb-4 leading-tight text-sutra-base" 
                 data-testid="hero-tagline"
               >
                 {slides[currentSlide].subtitle}
               </motion.p>
               
               {/* Refined Buttons */}
-              <div className="flex flex-wrap gap-4 mt-4">
+              <div className="flex flex-row justify-start items-center gap-3 mt-4 w-full md:w-auto">
                 <a 
                   href="#menu"
-                  className="group relative px-8 py-3.5 bg-sutra-accent text-sutra-deep font-heading font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3"
+                  className="group relative px-4 md:px-8 py-3 bg-sutra-accent text-sutra-deep font-heading font-bold uppercase tracking-widest text-[9px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-1.5 h-11"
                 >
-                  <Utensils size={14} className="relative z-10" />
+                  <Utensils size={13} className="relative z-10" />
                   <span className="relative z-10">View Menu</span>
                   <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </a>
                 <button 
                   onClick={onOrderClick}
-                  className="group relative px-8 py-3.5 border border-sutra-base/30 text-sutra-base font-heading font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 hover:bg-sutra-base hover:text-sutra-deep active:scale-95 flex items-center justify-center gap-3"
+                  className="group relative px-3 md:px-8 py-3 border border-sutra-base/30 text-sutra-base font-heading font-bold uppercase tracking-widest text-[9px] md:text-xs rounded-full overflow-hidden transition-all hover:scale-105 hover:bg-sutra-base hover:text-sutra-deep active:scale-95 flex items-center justify-center gap-1.5 h-11"
                 >
                   <span className="relative z-10">Order Online</span>
-                  <div className="flex -space-x-3 group-hover:-space-x-1 transition-all duration-500 relative z-10">
-                    <img src="/images/hero/icons/swiggy.png" className="w-6 h-6 md:w-7 md:h-7 object-contain rounded-full bg-white p-1 ring-2 ring-sutra-deep/10" alt="Swiggy" width={28} height={28} />
-                    <img src="/images/hero/icons/zomato.png" className="w-6 h-6 md:w-7 md:h-7 object-contain rounded-full bg-white p-1 ring-2 ring-sutra-deep/10" alt="Zomato" width={28} height={28} />
+                  <div className="flex -space-x-2 group-hover:-space-x-1 transition-all duration-500 relative z-10">
+                    <img src="/images/hero/icons/swiggy.png" className="w-5 h-5 md:w-7 md:h-7 object-contain rounded-full bg-white p-0.5 ring-2 ring-sutra-deep/10" alt="Swiggy" width={28} height={28} />
+                    <img src="/images/hero/icons/zomato.png" className="w-5 h-5 md:w-7 md:h-7 object-contain rounded-full bg-white p-0.5 ring-2 ring-sutra-deep/10" alt="Zomato" width={28} height={28} />
                   </div>
                 </button>
               </div>
