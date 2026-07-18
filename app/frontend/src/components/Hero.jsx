@@ -90,7 +90,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
     <section 
       id="top"
       ref={containerRef}
-      className="relative h-[85vh] md:h-[110vh] bg-sutra-base overflow-hidden flex flex-col"
+      className="relative h-[75vh] md:h-[110vh] bg-sutra-base overflow-hidden flex flex-col"
       data-testid="hero-section"
     >
       {/* Background Carousel (Cross-fade Optimized) */}
@@ -166,7 +166,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
               </motion.div>
             </div>
             
-            <h1 className="font-display text-[11vw] md:text-[9.5vw] leading-[0.82] text-sutra-base uppercase" data-testid="hero-title">
+            <h1 className="font-display text-[13.5vw] md:text-[9.5vw] leading-[1.05] md:leading-[0.82] text-sutra-base uppercase" data-testid="hero-title">
               <div className="overflow-hidden">
                 <motion.span 
                   key={`title-${currentSlide}`}
@@ -227,22 +227,22 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
         </div>
       </div>
 
-      {/* Repositioned Navigation (Compact Bottom Right) */}
+      {/* Repositioned Navigation (Horizontal Swipe on Mobile / Compact Bottom Right on Desktop) */}
       <motion.div 
         style={{ opacity: exitOpacity, y: useTransform(scrollYProgress, [0, 0.5], [0, 50]) }}
-        className="absolute right-6 md:right-12 bottom-24 flex flex-col items-end gap-4 z-30"
+        className="absolute left-0 bottom-4 w-full flex flex-col items-center md:items-end md:right-12 md:bottom-24 md:left-auto md:w-auto gap-2 md:gap-4 z-30 px-6 md:px-0"
       >
-        <div className="w-[1px] h-8 bg-sutra-accent/30 mb-1 origin-bottom" />
-        <div className="flex flex-col gap-3">
+        <div className="hidden md:block w-[1px] h-8 bg-sutra-accent/30 mb-1 origin-bottom" />
+        <div className="flex flex-row md:flex-col gap-3 overflow-x-auto md:overflow-visible w-full md:w-auto scrollbar-none justify-center snap-x snap-mandatory">
           {slides.map((slide, index) => (
-            <div key={slide.id} className="flex items-center gap-3 group cursor-pointer justify-end" onClick={() => setCurrentSlide(index)}>
-              <span className={`font-heading text-[9px] tracking-[0.2em] transition-all duration-500 ${currentSlide === index ? 'text-sutra-accent opacity-100 translate-x-0' : 'text-sutra-base/20 opacity-0 translate-x-4 group-hover:opacity-40'}`}>
+            <div key={slide.id} className="flex items-center gap-3 group cursor-pointer justify-end snap-center" onClick={() => setCurrentSlide(index)}>
+              <span className={`hidden md:inline font-heading text-[9px] tracking-[0.2em] transition-all duration-500 ${currentSlide === index ? 'text-sutra-accent opacity-100 translate-x-0' : 'text-sutra-base/20 opacity-0 translate-x-4 group-hover:opacity-40'}`}>
                 0{index + 1}
               </span>
-              <div className={`transition-all duration-700 overflow-hidden rounded-theme border ${currentSlide === index ? 'border-sutra-accent w-16 h-10 scale-110 shadow-2xl' : 'border-white/10 w-10 h-7 opacity-30 group-hover:opacity-100'}`}>
+              <div className={`transition-all duration-700 overflow-hidden rounded-theme border shrink-0 ${currentSlide === index ? 'border-sutra-accent w-16 h-16 md:w-16 md:h-10 md:scale-110 shadow-2xl' : 'border-white/10 w-16 h-16 md:w-10 md:h-7 opacity-75 md:opacity-30 group-hover:opacity-100'}`}>
                 <picture className="w-full h-full">
                   <source srcSet={slide.url} type="image/webp" />
-                  <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" width={64} height={40} />
+                  <img src={slide.url} alt={slide.title} className="w-full h-full object-cover" width={64} height={64} />
                 </picture>
               </div>
             </div>
@@ -260,16 +260,16 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           opacity: assetExitOpacity,
           filter: assetBlurString
         }}
-        className="absolute top-[18%] right-[5%] w-[28vw] md:w-[18vw] aspect-square pointer-events-none select-none z-10"
+        className="absolute top-[8%] right-[-10%] md:top-[18%] md:right-[5%] w-[45vw] md:w-[18vw] aspect-square pointer-events-none select-none z-10"
         data-testid="floating-png-pizza-slice"
       >
         <motion.div
           animate={{ 
-            y: [0, -20, 0],
-            rotate: [0, 5, 0]
+            y: [0, -25, 0],
+            rotate: [0, 8, 0]
           }}
           transition={{ 
-            duration: 5, 
+            duration: 6, 
             repeat: Infinity, 
             ease: "easeInOut"
           }}
@@ -300,19 +300,18 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           opacity: assetExitOpacity,
           filter: assetBlurString
         }}
-        className="absolute top-[35%] right-[35%] md:right-[45%] w-[40vw] md:w-[30vw] aspect-square pointer-events-none select-none z-10"
+        className="absolute bottom-[-5%] left-[-15%] md:bottom-auto md:left-auto md:top-[35%] md:right-[45%] w-[65vw] md:w-[30vw] aspect-square pointer-events-none select-none z-10"
         data-testid="floating-png-mojito"
       >
         <motion.div
           animate={{ 
-            y: [0, 20, 0],
-            rotate: [0, -5, 0]
+            y: [0, 25, 0],
+            rotate: [0, -8, 0]
           }}
           transition={{ 
             duration: 6, 
             repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 1
+            ease: "easeInOut"
           }}
           className="w-full h-full"
         >
@@ -336,7 +335,7 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
       {/* Scroll Cue */}
       <motion.div 
         style={{ opacity: exitOpacity, y: useTransform(scrollYProgress, [0, 0.2], [0, 50]) }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10"
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-4 z-10"
       >
         <span className="font-heading uppercase tracking-[0.4em] text-[10px] text-sutra-base/40">EXPLORE SUTRA</span>
         <div className="w-[1px] h-12 bg-sutra-base/20 relative overflow-hidden">
