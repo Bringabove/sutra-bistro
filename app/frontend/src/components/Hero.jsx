@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
 import { X, Utensils } from 'lucide-react';
 import MagneticButton from './MagneticButton';
-import pizzaImg from '../assets/pizza.webp';
-import mojitoImg from '../assets/mojito.webp';
 
 const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -277,20 +275,24 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <div className="w-full h-auto overflow-hidden relative">
+          <picture className="w-full h-full block">
+            {/* Serve a highly compressed mobile-specific WebP for screens under 768px */}
+            <source media="(max-width: 767px)" srcSet="/images/optimized/pizza-mobile.webp" type="image/webp" />
+            {/* Serve the standard WebP for desktop */}
+            <source media="(min-width: 768px)" srcSet="/images/optimized/pizza-desktop.webp" type="image/webp" />
             <img 
-              src={pizzaImg} 
-              alt="Pizza Slice" 
-              className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" 
-              fetchPriority="high" 
-              loading="eager" 
-              width={600}
+              src="/images/fallback/pizza.jpg" 
+              alt="Authentic Wood-fired Pizza"
+              width={600} 
               height={600}
+              loading="eager"
+              fetchPriority="high"
+              className="w-full h-full object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]" 
               onError={(e) => {
-                console.error("Asset fallback resolution triggered for:", pizzaImg);
+                console.error("Asset fallback resolution triggered for pizza fallback path");
               }}
             />
-          </div>
+          </picture>
         </motion.div>
       </motion.div>
 
@@ -318,20 +320,24 @@ const Hero = ({ data = [], settings = {}, branches = [], onOrderClick }) => {
           }}
           className="w-full h-full"
         >
-          <div className="w-full h-auto overflow-hidden relative">
+          <picture className="w-full h-full block">
+            {/* Serve a highly compressed mobile-specific WebP for screens under 768px */}
+            <source media="(max-width: 767px)" srcSet="/images/optimized/mojito-mobile.webp" type="image/webp" />
+            {/* Serve the standard WebP for desktop */}
+            <source media="(min-width: 768px)" srcSet="/images/optimized/mojito-desktop.webp" type="image/webp" />
             <img 
-              src={mojitoImg} 
-              alt="Mojito" 
-              className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" 
-              fetchPriority="high" 
-              loading="eager" 
-              width={600}
+              src="/images/fallback/mojito.jpg" 
+              alt="Mojito Cocktail"
+              width={600} 
               height={600}
+              loading="eager"
+              fetchPriority="high"
+              className="w-full h-full object-contain drop-shadow-[0_60px_100px_rgba(0,0,0,0.7)]" 
               onError={(e) => {
-                console.error("Asset fallback resolution triggered for:", mojitoImg);
+                console.error("Asset fallback resolution triggered for mojito fallback path");
               }}
             />
-          </div>
+          </picture>
         </motion.div>
       </motion.div>
 
